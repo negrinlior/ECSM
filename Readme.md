@@ -1,3 +1,3 @@
 # ECSM
 
-This is ECSM manager2
+This is ECSM manager
