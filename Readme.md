@@ -1,3 +1,5 @@
 # ECSM
 
-This is ECSM manager
+This is:
+  ECS Server
+  ECSM front end
