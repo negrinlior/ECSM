@@ -16,7 +16,6 @@ router.post('/signin',async function(req,res){
     try{
         var data=await DB.CommitSelectAndReturnRecordset(Qry);
         if (data.rowsAffected>0){
-            //res.write(JSON.stringify(data));
             res.statusCode=200;
             res.send('Success');
         }

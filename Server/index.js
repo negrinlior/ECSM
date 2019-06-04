@@ -12,11 +12,11 @@ app.use(cors());
 //Midleware
     //File routs
     const GetsVersion=require('./Version/version.js');
-    const postsLogin=require('./routs/api/login');
+    const postLogin=require('./routs/api/login');
 
     //Routh routing
     app.use('/',GetsVersion);
-    app.use('/api/login',postsLogin);
+    app.use('/api/login',postLogin);
 
 
 //Run server

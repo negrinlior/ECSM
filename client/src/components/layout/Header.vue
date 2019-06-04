@@ -1,17 +1,18 @@
 <template>
 <div>
-    
-    <v-layout wrap style="height: 80px;">
-        <v-container>
-            <v-layout>
-                <v-btn
-                    color="pink"
+    <v-layout class="header" wrap style="height: 60px;">
+         <v-btn
+                    color="#33DDDD"
                     dark
+                    icon
                     @click.stop="drawer = !drawer"
                 >
-                תפריט
+                <v-icon>list</v-icon>
                 </v-btn>
-                <H1>ECSM</H1>
+
+        <v-container>
+            <v-layout>
+                <H1>ECS Managment</H1>
             </v-layout>       
         </v-container>
 
@@ -78,12 +79,6 @@ export default {
     .header {
         background: #333;
         color: #fff;
-        text-align: center;
-        padding: 10px;
     }
-
-    .header a{
-        color: #fff;
-        padding-right: 5px;
-    }
+    
 </style>

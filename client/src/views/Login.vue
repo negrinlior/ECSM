@@ -16,16 +16,46 @@
                 ></v-text-field>
             </v-flex>
            
-            <v-btn depressed small @click="Login">התחבר</v-btn>
+            <v-btn depressed small v-on:click="DoLogin()">התחבר</v-btn>
         
         </v-form>
+        <v-snackbar
+            v-model="snackbarLoginSuccess"
+            :color="snackbarColor"
+            :timeout="snackbarTimeout"
+            :top="true"
+        >
+            <B>{{ snackbarText }}</B>
+         </v-snackbar>
     </div>
 </template>
 
 <script>
+import LoginService from '../services/LoginService.js';
 export default {
-    
-}
+    data () {
+      return {
+        snackbarLoginSuccess: false,
+        snackbarColor: '',
+        snackbarTimeout: 1500,        
+      }
+    },
+    methods: {
+        async DoLogin(){
+            var ANS=await LoginService.postUser(this.username,this.password);
+            this.snackbarLoginSuccess=true;;
+            if (ANS==200){
+                this.snackbarText='ההתחברות הצליחה';
+                this.snackbarColor='#3bcc28';
+            }
+            else{
+                this.snackbarText='ההתחברות נכשלה';
+                this.snackbarColor='#ce4040';
+            }
+        }
+    }
+};
+
 </script>
 
 <style scoped>
