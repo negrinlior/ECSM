@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
     <BR/><BR/><BR/><BR/><BR/><BR/> <BR/><BR/><BR/>  
-    <img alt="Vue logo" src="../assets/ECSLogo.png" width="230" height="100">
-    <img alt="Vue logo" src="../assets/MalabLogo.png" width="380" height="100">    
+    <img alt="ECS logo" src="../assets/ECSLogo.png" width="230" height="100">
+    <img alt="MALAB logo" src="../assets/MalabLogo.png" width="380" height="100">    
   </div>
 </template>
 

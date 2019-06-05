@@ -13,8 +13,7 @@ class LoginService {
             password: PAS
         })
         .then(function (response) {
-            return response.status;
-            // alert(response.data);
+            return response;//.status;
           })
           .catch(function (error) {
             alert('F' + error);

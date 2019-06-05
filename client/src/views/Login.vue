@@ -43,9 +43,10 @@ export default {
     methods: {
         async DoLogin(){
             var ANS=await LoginService.postUser(this.username,this.password);
-            this.snackbarLoginSuccess=true;;
-            if (ANS==200){
-                this.snackbarText='ההתחברות הצליחה';
+            this.snackbarLoginSuccess=true;
+            if (ANS.status==200){
+                alert( JSON.stringify(ANS));
+                this.snackbarText='ההתחברות הצליחה' + ' ' ;
                 this.snackbarColor='#3bcc28';
             }
             else{
