@@ -45,8 +45,7 @@ export default {
             var ANS=await LoginService.postUser(this.username,this.password);
             this.snackbarLoginSuccess=true;
             if (ANS.status==200){
-                alert( JSON.stringify(ANS));
-                this.snackbarText='ההתחברות הצליחה' + ' ' ;
+                this.snackbarText='ההתחברות הצליחה' + ' ' + ANS.data.user;
                 this.snackbarColor='#3bcc28';
             }
             else{

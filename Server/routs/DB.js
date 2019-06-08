@@ -1,36 +1,17 @@
-
+const config = require('../config');
 const SQL=require("mssql");
 
 var DBConfig=
 {
-    server:'DESKTOP-CDGMIRH\\ECS',
-    database:'MALAB',
-    user:'ECSMUser',
-    password:'ECSMUser',
+    server:config.DBserver,
+    database:config.DBName,
+    user:config.DBUser,
+    password:config.DBPassword,
     encrypt: true,
-    port:1433
+    port:config.DBPort
+
 };
 
-// function OLDNOPROMISE_fCommitSelectAndReturnRecordset(QrySTR,callback){
-
-//     const pool=new SQL.ConnectionPool(DBConfig);
-//     var req= new SQL.Request(pool);
-    
-//     pool.connect(function (err){ //Try to connect
-//         if (err) {console.log(err);return;}
-//         else
-//         {
-//             req.query(QrySTR,(err,recordset)=>{ //commit query
-//                 if (err){console.log(err);}
-//                 else{
-//                     callback(recordset);    
-//                 }
-//                 pool.close();
-//             });
-
-//         };
-//     });
-// }
 
 function fCommitSelectAndReturnRecordset(QrySTR){
     return new Promise((resolve,reject)=>{

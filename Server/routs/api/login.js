@@ -1,6 +1,7 @@
 const express=require('express');
 const DB=require('../DB');
 const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 const router=express.Router();
 
@@ -17,16 +18,13 @@ router.post('/signin',async function(req,res){
     try{
         var data=await DB.CommitSelectAndReturnRecordset(Qry);
         if (data.rowsAffected>0){
-            let token= jwt.sign({user: UserName, password:Password},"Secret",{issuer: "ECSSystems" ,expiresIn: 86400}); //Expiers in 24H
-            // console.log(token);
-            // res.statusCode=200;
-            // res.send({ auth: true, token: token, user: user });
-            res.status(200).send({ auth: true, token: token, user: user });
+            let token= jwt.sign({user: UserName, password:Password},config.PrivateKey,{issuer: "ECSSystems" ,expiresIn: 86400}); //Expiers in 24H
+            res.status(200).send({auth: 'true', token: token,user: UserName});
+
         }
         else
         {
-            res.statusCode=204;
-            res.send('Fail');
+            res.status(204).end();
         }
        
         
