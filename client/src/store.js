@@ -8,6 +8,10 @@ export default new Vuex.Store({
     user: '',
     JWT:''
   },
+  getters:{
+    GetUser: state=>{return state.user},
+    GetUserFirstChar: state=>{return state.user.substring(0, 1)}
+  },
   mutations: {
     SetUser: (state,UserName)=>
     {
@@ -21,8 +25,5 @@ export default new Vuex.Store({
   },
   actions: {
 
-  },
-  getters:{
-    GetUserFirstChar: state=>{state.user.substring(0, 1)}
   }
 })

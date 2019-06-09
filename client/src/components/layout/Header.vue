@@ -9,16 +9,18 @@
         >
         <v-icon>list</v-icon>
         </v-btn>
-        <v-btn
-                    color="#33DDDD"
-                    dark
-                    icon
-        >
-        <div v-if="UserName==''"><v-icon>vpn_key</v-icon></div>
-        <div v-else>{{GetUserFirstChar}}</div>
-        </v-btn>
         <H1>ECS Managment</H1>
-       
+        <v-btn
+            color="#33DDDD"
+            dark
+            icon
+            left
+        >
+            <div v-if="GetUser==''"><v-icon>vpn_key</v-icon></div>
+            <div v-else>{{GetUserFirstChar}}</div>
+        </v-btn>
+
+
         <v-navigation-drawer
             v-model="drawer"
             absolute
@@ -56,7 +58,12 @@
             </v-list-tile>
         </v-list>
         </v-navigation-drawer>
+       
+       
     </v-layout>
+   
+
+    
 </div>
 </template>
 
@@ -74,10 +81,8 @@ export default {
         ]
       }
     },
-    computed: mapState({
-        UserName: 'user'
-    }),
-    ...mapGetters(['GetUserFirstChar'])
+    computed: mapGetters(['GetUserFirstChar','GetUser']),
+       
 }
 
 </script>
