@@ -1,21 +1,24 @@
 <template>
 <div>
     <v-layout class="header" wrap style="height: 60px;">
-         <v-btn
+        <v-btn
                     color="#33DDDD"
                     dark
                     icon
                     @click.stop="drawer = !drawer"
-                >
-                <v-icon>list</v-icon>
-                </v-btn>
-
-        <v-container>
-            <v-layout>
-                <H1>ECS Managment</H1>
-            </v-layout>       
-        </v-container>
-
+        >
+        <v-icon>list</v-icon>
+        </v-btn>
+        <v-btn
+                    color="#33DDDD"
+                    dark
+                    icon
+        >
+        <div v-if="UserName==''"><v-icon>vpn_key</v-icon></div>
+        <div v-else>{{GetUserFirstChar}}</div>
+        </v-btn>
+        <H1>ECS Managment</H1>
+       
         <v-navigation-drawer
             v-model="drawer"
             absolute
@@ -39,7 +42,6 @@
             <v-list-tile
                 v-for="item in items"
                 :key="item.title"
-                @click=""
                 :to="item.adrs"
             >
                 <v-list-tile-action>
@@ -60,8 +62,9 @@
 
 
 <script>
+import {mapState,mapGetters} from 'vuex'
 export default {
-     data () {
+    data () {
       return {
         drawer: null,
         items: [
@@ -70,7 +73,11 @@ export default {
           { title: 'אודות', icon: 'question_answer', adrs: '/about' }
         ]
       }
-    }
+    },
+    computed: mapState({
+        UserName: 'user'
+    }),
+    ...mapGetters(['GetUserFirstChar'])
 }
 
 </script>

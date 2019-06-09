@@ -1,31 +1,50 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import store from './store.js'
 
 Vue.use(Router)
 
-export default new Router({
+const RTR= new Router({
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: { 
+        guest: true
+      }
     },
     {
       path: '/about',
       name: 'About',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import('./views/About.vue'),
+      meta: { 
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
       name: 'Login',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
+      component: () => import( './views/Login.vue')
     }
   ]
 })
+
+RTR.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {//if requiers authentication
+    if (store.state.JWT==='') {
+      next({
+        path: '/login'
+      })
+    }
+    else{
+      next();
+    }
+  }
+  else{
+    next();
+  }
+})
+
+export default RTR
