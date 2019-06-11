@@ -4,19 +4,20 @@
         <div id="LogInDiv" v-if="UserName==''">
             <H1 >התחברות</H1>
             <v-form>
-                <v-flex xs12 sm6 md3>
+                <!-- <v-flex xs12 sm6 md3> -->
                     <v-text-field
                         type="username"
                         v-model="username"
                         label="שם משתמש"
                         clearable
+                        width="500"
                     ></v-text-field>
                     <v-text-field
                         type="password"
                         v-model="password"
                         label="סיסמא"
                     ></v-text-field>
-                </v-flex>
+                <!-- </v-flex> -->
                 <v-btn depressed small v-on:click="DoLogin()">התחבר</v-btn>
             
             </v-form>

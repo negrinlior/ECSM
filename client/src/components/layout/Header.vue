@@ -9,17 +9,20 @@
         >
         <v-icon>list</v-icon>
         </v-btn>
-        <H1>ECS Managment</H1>
+        
+        <H1 class="ECSHEADER">ECS Managment</H1>
+
+        <v-spacer/>
         <v-btn
             color="#33DDDD"
             dark
             icon
             left
+            @click.stop="LGNF = !LGNF"
         >
             <div v-if="GetUser==''"><v-icon>vpn_key</v-icon></div>
             <div v-else>{{GetUserFirstChar}}</div>
         </v-btn>
-
 
         <v-navigation-drawer
             v-model="drawer"
@@ -33,7 +36,7 @@
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-                <v-list-tile-title>User</v-list-tile-title>
+                <v-list-tile-title>{{GetUser}}</v-list-tile-title>
             </v-list-tile-content>
             </v-list-tile>
         </v-list>
@@ -58,10 +61,12 @@
             </v-list-tile>
         </v-list>
         </v-navigation-drawer>
-       
-       
     </v-layout>
-   
+    <v-container fluid class="lgin" v-if="LGNF" >
+        <v-card class="card--flex-toolbar" height="250">
+            <LI/>
+        </v-card>
+    </v-container>
 
     
 </div>
@@ -69,20 +74,26 @@
 
 
 <script>
-import {mapState,mapGetters} from 'vuex'
+import LI from '../../views/Login';
+import {mapGetters} from 'vuex';
+
 export default {
     data () {
       return {
         drawer: null,
+        LGNF: null,
         items: [
           { title: 'בית', icon: 'dashboard', adrs: '/' },
-          { title: 'התחברות', icon: 'dashboard', adrs: '/login' },
+        //   { title: 'התחברות', icon: 'dashboard', adrs: '/login' },
           { title: 'אודות', icon: 'question_answer', adrs: '/about' }
         ]
       }
     },
     computed: mapGetters(['GetUserFirstChar','GetUser']),
-       
+    components:{
+        LI
+    }
+    
 }
 
 </script>
@@ -91,6 +102,17 @@ export default {
     .header {
         background: #333;
         color: #fff;
+    }
+
+    .lgin{
+        float: right;
+        width: 400px;
+        margin: 10;
+        }
+    
+    .ECSHEADER{
+        padding-left: 15px;
+        padding-top: 10px;
     }
     
 </style>
