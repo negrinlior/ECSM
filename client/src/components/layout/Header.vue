@@ -83,9 +83,10 @@ export default {
         drawer: null,
         LGNF: null,
         items: [
-          { title: 'בית', icon: 'dashboard', adrs: '/' },
+            { title: 'בית', icon: 'dashboard', adrs: '/' },
         //   { title: 'התחברות', icon: 'dashboard', adrs: '/login' },
-          { title: 'אודות', icon: 'question_answer', adrs: '/about' }
+            { title: 'משתמשים', icon: 'face', adrs: '/UsersGrid' },
+            { title: 'אודות', icon: 'question_answer', adrs: '/about' }
         ]
       }
     },

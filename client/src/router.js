@@ -27,7 +27,15 @@ const RTR= new Router({
       path: '/login',
       name: 'Login',
       component: () => import( './views/Login.vue')
-    }
+    },
+    {
+      path: '/UsersGrid',
+      name: 'UsersGrid',
+      component: () => import('./views/ECSM/UsersGrid.vue'),
+      meta: { 
+        requiresAuth: false
+      }
+    },
   ]
 })
 
