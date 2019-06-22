@@ -14,10 +14,12 @@ app.use(cors());
     //File routs
     const GetsVersion=require('./Version/version.js');
     const postLogin=require('./routs/api/login');
+    const UsersAPI=require('./routs/api/UserList');
 
     //Routh routing
     app.use('/',GetsVersion);
     app.use('/api/login',postLogin);
+    app.use('/api/UsersAPI',UsersAPI);
 
 
 //Run server

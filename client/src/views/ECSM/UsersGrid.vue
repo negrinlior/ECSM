@@ -2,8 +2,14 @@
   <div class="UsersGrid">
     <!-- <h1>This is the users grid</h1>
     <BR/> -->
-    <ejs-grid  :allowFiltering='true' allowSorting='true' :filterSettings='filterOptions'  :dataSource="data"  > 
+    <ejs-grid  :allowFiltering='true' allowSorting='true' :filterSettings='filterOptions'  :dataSource="data" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true'  > 
       <e-columns>
+        <e-column field='ID' headerText='ID' textAlign='Right' width=100></e-column>
+        <e-column field='User' headerText='שם משתמש' textAlign='Left' width=100></e-column>
+        <e-column field='First' headerText='שם פרטי' textAlign='Right' width=100></e-column>
+        <e-column field='Last' headerText='שם משפחה' textAlign='Right' width=100></e-column>
+
+
         <e-column field='OrderID' headerText='Order ID' textAlign='Right' width=100></e-column>
         <e-column field='CustomerID' headerText='Customer ID' width=120></e-column>
         <e-column field='Freight' headerText='Freight' width=100></e-column>
@@ -12,17 +18,22 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
     import Vue from 'vue';
-    import { GridPlugin, Filter, Sort } from '@syncfusion/ej2-vue-grids';
-    
+    import { GridPlugin, Filter, Sort, Edit, Toolbar,ExcelExport } from '@syncfusion/ej2-vue-grids';
+    import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data";
     
 
     Vue.use(GridPlugin);
 
-    export default {
-      data () {
+    export default Vue.extend({
+      data: ()=>{
+        let SERVICE_URI: string =" http://localhost:5000/";
         return {
+          data2: new DataManager({
+            url: SERVICE_URI + 'api/UsersAPI',
+            adaptor: new WebApiAdaptor()
+          }),
           data: [
               { OrderID: 10248, CustomerID: 'VINET', Freight: 32.38 },
               { OrderID: 10249, CustomerID: 'TOMSP', Freight: 11.61 },
@@ -56,19 +67,20 @@
               { OrderID: 10255, CustomerID: 'RICSU', Freight: 148.33 },
               
           ],
-        filterOptions: {
-          type: 'CheckBox'
-        },
-        
-        }
+          filterOptions: {
+            type: 'CheckBox'
+          },
+          toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel'],
+          editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
+        };
       },
       provide: {
-      grid: [Sort,Filter]
-  }
-    }
+        grid: [Sort,Filter,Edit, Toolbar,ExcelExport  ]
+      }
+    } );
 </script>
 
-<style >
+<style>
     @import '../../../node_modules/@syncfusion/ej2-base/styles/material.css'; 
     @import '../../../node_modules/@syncfusion/ej2-buttons/styles/material.css'; 
     @import '../../../node_modules/@syncfusion/ej2-calendars/styles/material.css'; 
