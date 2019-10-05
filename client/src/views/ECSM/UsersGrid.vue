@@ -2,17 +2,22 @@
   <div class="UsersGrid">
     <!-- <h1>This is the users grid</h1>
     <BR/> -->
-    <ejs-grid  :allowFiltering='true' allowSorting='true' :filterSettings='filterOptions'  :dataSource="data" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true'  > 
+    <ejs-grid  allowFiltering='true' allowSorting='true' :filterSettings='filterOptions'  :dataSource="data" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true'  > 
       <e-columns>
-        <e-column field='ID' headerText='ID' textAlign='Right' width=100></e-column>
-        <e-column field='User' headerText='שם משתמש' textAlign='Left' width=100></e-column>
+        <e-column field='ID' headerText='ID' textAlign='Right' width=50></e-column>
         <e-column field='First' headerText='שם פרטי' textAlign='Right' width=100></e-column>
-        <e-column field='Last' headerText='שם משפחה' textAlign='Right' width=100></e-column>
+        <e-column field='Last' headerText='שם משפחה' textAlign='Right' width=120></e-column>
+        <e-column field='Team' headerText='צוות' textAlign='Right' width=100></e-column>
+        <e-column field='User' headerText='שם משתמש' textAlign='Left' width=120></e-column>
+        <e-column field='PassWord' headerText='סיסמא' textAlign='Left' width=100></e-column> 
+        <e-column field='Email' headerText='מייל' textAlign='Left' width=150></e-column> 
+        <e-column field='Phone' headerText='טלפון' textAlign='Left' width=100   ></e-column> 
+        
 
 
-        <e-column field='OrderID' headerText='Order ID' textAlign='Right' width=100></e-column>
+        <!-- <e-column field='OrderID' headerText='Order ID' textAlign='Right' width=100></e-column>
         <e-column field='CustomerID' headerText='Customer ID' width=120></e-column>
-        <e-column field='Freight' headerText='Freight' width=100></e-column>
+        <e-column field='Freight' headerText='Freight' width=100></e-column>  -->
       </e-columns>
     </ejs-grid>
   </div>
@@ -30,11 +35,11 @@
       data: ()=>{
         let SERVICE_URI: string =" http://localhost:5000/";
         return {
-          data2: new DataManager({
+          data: new DataManager({
             url: SERVICE_URI + 'api/UsersAPI',
             adaptor: new WebApiAdaptor()
           }),
-          data: [
+          data2: [
               { OrderID: 10248, CustomerID: 'VINET', Freight: 32.38 },
               { OrderID: 10249, CustomerID: 'TOMSP', Freight: 11.61 },
               { OrderID: 10250, CustomerID: 'HANAR', Freight: 65.83 },
