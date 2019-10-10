@@ -37,9 +37,10 @@
         return {
           data: new DataManager({
             url: SERVICE_URI + 'api/UsersAPI',
-            adaptor: new WebApiAdaptor()
+            adaptor: new WebApiAdaptor(),
+            offline: true
           }),
-          data2: [
+          /* data2: [
               { OrderID: 10248, CustomerID: 'VINET', Freight: 32.38 },
               { OrderID: 10249, CustomerID: 'TOMSP', Freight: 11.61 },
               { OrderID: 10250, CustomerID: 'HANAR', Freight: 65.83 },
@@ -71,7 +72,7 @@
               { OrderID: 10254, CustomerID: 'CHOPS', Freight: 22.98 },
               { OrderID: 10255, CustomerID: 'RICSU', Freight: 148.33 },
               
-          ],
+          ], */
           filterOptions: {
             type: 'CheckBox'
           },
@@ -80,7 +81,7 @@
         };
       },
       provide: {
-        grid: [Sort,Filter,Edit, Toolbar,ExcelExport  ]
+        grid: [Sort,Filter,Edit, Toolbar]       
       }
     } );
 </script>
