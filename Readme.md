@@ -2,4 +2,4 @@
 
 This is:
   ECS Server
-  ECSM front ends
+  ECSM front end
