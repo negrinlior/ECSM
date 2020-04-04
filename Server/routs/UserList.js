@@ -6,7 +6,7 @@ const router=express.Router();
 
 router.get('/',async function(req,res){
     var Qry=`SELECT * FROM Users`;
-    
+
     try{
         //console.log('Get users');
         var data=await DB.CommitSelectAndReturnRecordset(Qry);
