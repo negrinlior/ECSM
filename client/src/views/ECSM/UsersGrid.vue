@@ -2,7 +2,7 @@
   <div class="UsersGrid">
     <!-- <h1>This is the users grid</h1>
     <BR/> -->
-    <ejs-grid  ref='LiorGrid' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true'> 
+    <ejs-grid  ref='LiorGrid' height=480 :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true'> 
       <e-columns>
         <e-column field='ID' headerText='ID' textAlign='Right' width=50></e-column>
         <e-column field='First' headerText='שם פרטי' textAlign='Right' width=100></e-column>
