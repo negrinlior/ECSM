@@ -2,22 +2,17 @@
   <div class="UsersGrid">
     <!-- <h1>This is the users grid</h1>
     <BR/> -->
-    <ejs-grid  ref='LiorGrid' height=480 :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true'> 
+    <ejs-grid  ref='LiorGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' > 
       <e-columns>
-        <e-column field='ID' headerText='ID' textAlign='Right' width=50></e-column>
+        <e-column field='ID'  headerText='ID' textAlign='Right' width=60 :allowEditing ='false' :isPrimaryKey='true'></e-column>
         <e-column field='First' headerText='שם פרטי' textAlign='Right' width=100></e-column>
         <e-column field='Last' headerText='שם משפחה' textAlign='Right' width=120></e-column>
-        <e-column field='Team' headerText='צוות' textAlign='Right' width=100></e-column>
+        <e-column field='Team' headerText='צוות' textAlign='Right' width=100 :visible='false'></e-column>
         <e-column field='User' headerText='שם משתמש' textAlign='Left' width=120></e-column>
         <e-column field='PassWord' headerText='סיסמא' textAlign='Left' width=100></e-column> 
         <e-column field='Email' headerText='מייל' textAlign='Left' width=150></e-column> 
         <e-column field='Phone' headerText='טלפון' textAlign='Left' width=100   ></e-column> 
-        
-
-
-        <!-- <e-column field='OrderID' headerText='Order ID' textAlign='Right' width=100></e-column>
-        <e-column field='CustomerID' headerText='Customer ID' width=120></e-column>
-        <e-column field='Freight' headerText='Freight' width=100></e-column>  -->
+       
       </e-columns>
     </ejs-grid>
   </div>
@@ -25,11 +20,16 @@
 
 <script lang="ts">
     import Vue from 'vue';
+    import { L10n, setCulture } from '@syncfusion/ej2-base';
     import { GridPlugin, Filter, Sort, Edit, Toolbar,ExcelExport } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import UsersData from '../../services/UsersServices';
+    import HebConf from './GridHebConfig.js';
+
     const axios = require('axios');
 
+    setCulture('he-IL');
+    L10n.load(HebConf);
 
     Vue.use(GridPlugin);
 
@@ -42,15 +42,15 @@ export default Vue.extend({
                 dataSource: new DataManager({
                   json: [],
                   adaptor: new RemoteSaveAdaptor,
-                  insertUrl: '/Home/Insert',
+                  insertUrl: SERVICE_URL + 'api/UsersAPI/InsertUser',
                   updateUrl: SERVICE_URL + 'api/UsersAPI/UpdateUser',
-                  removeUrl: '/Home/Delete'
+                  removeUrl: SERVICE_URL + 'api/UsersAPI/DeleteUser',
                 }), 
                 filterOptions: {
                   type: 'CheckBox'
                 },
                 toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel'],
-                editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
+                editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, showDeleteConfirmDialog: true },
                 
               };
       },
