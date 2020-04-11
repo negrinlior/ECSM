@@ -1,14 +1,12 @@
-// import axios from 'axios';
 const axios = require('axios');
+import ServerConfig from '../ServerConfig.js';
 
-const url='http://localhost:5000/api/UsersAPI/';
-
-class UsersServices {
+class GetDataServices {
     //Get users
     static GetUsersData(grid: any){
       var gridObj = grid 
       
-      return axios.get(url)
+      return axios.get(ServerConfig.UsersAPI)
                     .then(response => {
                       gridObj.dataSource.dataSource.json = response.data; 
                       gridObj.refreshColumns();   
@@ -17,12 +15,8 @@ class UsersServices {
                     .catch(e => {
                       alert('F' + e);
                     })
-  }
+    }
 
-    static GetUsersData1()
-      {
-        return 'hi';
-      }
 }
 
-export default UsersServices;
+export default GetDataServices;

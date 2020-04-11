@@ -1,7 +1,5 @@
 <template>
   <div class="UsersGrid">
-    <!-- <h1>This is the users grid</h1>
-    <BR/> -->
     <ejs-grid  ref='LiorGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' > 
       <e-columns>
         <e-column field='ID'  headerText='ID' textAlign='Right' width=60 :allowEditing ='false' :isPrimaryKey='true'></e-column>
@@ -23,10 +21,9 @@
     import { L10n, setCulture } from '@syncfusion/ej2-base';
     import { GridPlugin, Filter, Sort, Edit, Toolbar,ExcelExport } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
-    import UsersData from '../../services/UsersServices';
+    import UsersData from '../../services/GetDataServices';
     import HebConf from './GridHebConfig.js';
-
-    const axios = require('axios');
+    import ServerConfig from '../../ServerConfig';
 
     setCulture('he-IL');
     L10n.load(HebConf);
@@ -35,16 +32,14 @@
 
 export default Vue.extend({
       data: ()=>{
-        let SERVICE_URL: string =" http://localhost:5000/";
 
-
-        return {
+return {
                 dataSource: new DataManager({
                   json: [],
                   adaptor: new RemoteSaveAdaptor,
-                  insertUrl: SERVICE_URL + 'api/UsersAPI/InsertUser',
-                  updateUrl: SERVICE_URL + 'api/UsersAPI/UpdateUser',
-                  removeUrl: SERVICE_URL + 'api/UsersAPI/DeleteUser',
+                  insertUrl: ServerConfig.UsersAPI + 'InsertUser',
+                  updateUrl: ServerConfig.UsersAPI + 'UpdateUser',
+                  removeUrl: ServerConfig.UsersAPI + 'DeleteUser',
                 }), 
                 filterOptions: {
                   type: 'CheckBox'
@@ -59,8 +54,8 @@ export default Vue.extend({
       },
       methods:{
             created() { 
-            var gridOj =this.$refs.LiorGrid;  
-            UsersData.GetUsersData(gridOj);
+              var gridOj =this.$refs.LiorGrid;  
+              UsersData.GetUsersData(gridOj);
             },
       }
     } );
