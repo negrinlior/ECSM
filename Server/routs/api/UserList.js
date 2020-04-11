@@ -46,11 +46,14 @@ router.post('/UpdateUser',async function(req,res){
 
         var data=await DB.ExecuteSP(sqlreq,"ECSM_UsersTableUpdate");
         if (data.output.Success=1 && data.rowsAffected[0]>0){
-            res.status(200).send();
+            res.send(JSON.stringify(Bdy));
         }
         else
         {
-            res.status(204).send('err');
+            Bdy.User='ERR'
+            Bdy.First='שגיאה';
+            Bdy.Last='לא נשמר';
+            res.send(JSON.stringify(Bdy));
         }
        
     }catch(err){
