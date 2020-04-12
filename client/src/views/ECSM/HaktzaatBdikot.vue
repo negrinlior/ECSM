@@ -1,15 +1,16 @@
 <template>
-  <div class="UsersGrid">
+  <!-- FK: MisparKablan, ID ANAF, ID CUSTOMER, MISPAR RASHUT-->
+  <div class="HaktzaatBdikot">
     <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' > 
       <e-columns>
         <e-column field='ID'  headerText='ID' textAlign='Right' width=60 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
-        <e-column field='First' headerText='שם פרטי' textAlign='Right' width=100></e-column>
-        <e-column field='Last' headerText='שם משפחה' textAlign='Right' width=120></e-column>
-        <e-column field='Team' headerText='צוות' textAlign='Right' width=100 :visible='false'></e-column>
-        <e-column field='User' headerText='שם משתמש' textAlign='Left' width=120></e-column>
-        <e-column field='PassWord' headerText='סיסמא' textAlign='Left' width=100></e-column> 
-        <e-column field='Email' headerText='מייל' textAlign='Left' width=150></e-column> 
-        <e-column field='Phone' headerText='טלפון' textAlign='Left' width=100   ></e-column> 
+        <e-column field='Customer' headerText='לקוח' textAlign='Right' width=100></e-column>
+        <e-column field='Anaf' headerText='ענף' textAlign='Right' width=120></e-column>
+        <e-column field='Kablan' headerText='קבלן' textAlign='Right' width=100 :visible='false'></e-column>
+        <e-column field='Rashuiot' headerText='רשות' textAlign='Left' width=120></e-column>
+        <e-column field='[User' headerText='משתמש' textAlign='Left' width=100></e-column> 
+        <e-column field='Backup User' headerText='מגבה 1' textAlign='Left' width=150></e-column> 
+        <e-column field='Backup User 2' headerText='מגבה 2' textAlign='Left' width=100   ></e-column> 
        
       </e-columns>
     </ejs-grid>
@@ -60,7 +61,7 @@ export default Vue.extend({
             },
             created() { 
               var gridOj =this.$refs.MainGrid;  
-              GetDataServices.GetDataForGrid(gridOj,'UsersAPI');
+              GetDataServices.GetDataForGrid(gridOj,'HaktzaatBdikotAPI');
             },
         
         }

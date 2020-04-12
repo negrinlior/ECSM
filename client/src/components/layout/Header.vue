@@ -86,6 +86,7 @@ export default {
             { title: 'בית', icon: 'dashboard', adrs: '/' },
         //   { title: 'התחברות', icon: 'dashboard', adrs: '/login' },
             { title: 'משתמשים', icon: 'face', adrs: '/UsersGrid' },
+            { title: 'הקצאת בדיקות', icon: 'how_to_reg', adrs: '/HaktzaatBdikot' },
             { title: 'אודות', icon: 'question_answer', adrs: '/about' }
         ]
       }

@@ -36,6 +36,14 @@ const RTR= new Router({
         requiresAuth: false
       }
     },
+    {
+      path: '/HaktzaatBdikot',
+      name: 'HaktzaatBdikot',
+      component: () => import('./views/ECSM/HaktzaatBdikot.vue'),
+      meta: { 
+        requiresAuth: false
+      }
+    },
   ]
 })
 

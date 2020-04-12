@@ -15,11 +15,13 @@ app.use(cors());
     const GetsVersion=require('./Version/version.js');
     const postLogin=require('./routs/api/login');
     const UsersAPI=require('./routs/api/UserList');
+    const HaktzaatBdikotAPI=require('./routs/api/HaktzaatBdikot');
 
     //Routh routing
     app.use('/',GetsVersion);
     app.use('/api/login',postLogin);
     app.use('/api/UsersAPI',UsersAPI);
+    app.use('/api/HaktzaatBdikotAPI',HaktzaatBdikotAPI);
 
 
 //Run server
