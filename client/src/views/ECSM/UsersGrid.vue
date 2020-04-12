@@ -1,8 +1,8 @@
 <template>
   <div class="UsersGrid">
-    <ejs-grid  ref='LiorGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' > 
+    <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' > 
       <e-columns>
-        <e-column field='ID'  headerText='ID' textAlign='Right' width=60 :allowEditing ='false' :isPrimaryKey='true'></e-column>
+        <e-column field='ID'  headerText='ID' textAlign='Right' width=60 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
         <e-column field='First' headerText='שם פרטי' textAlign='Right' width=100></e-column>
         <e-column field='Last' headerText='שם משפחה' textAlign='Right' width=120></e-column>
         <e-column field='Team' headerText='צוות' textAlign='Right' width=100 :visible='false'></e-column>
@@ -19,7 +19,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin, Filter, Sort, Edit, Toolbar,ExcelExport } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import UsersData from '../../services/GetDataServices';
     import HebConf from './GridHebConfig.js';
@@ -33,7 +33,7 @@
 export default Vue.extend({
       data: ()=>{
 
-return {
+      return {
                 dataSource: new DataManager({
                   json: [],
                   adaptor: new RemoteSaveAdaptor,
@@ -44,20 +44,26 @@ return {
                 filterOptions: {
                   type: 'CheckBox'
                 },
-                toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel'],
+                toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'ExcelExport'],
                 editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, showDeleteConfirmDialog: true },
-                
               };
       },
       provide: {
-        grid: [Sort,Filter,Edit, Toolbar]       
+        grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize]       
       },
       methods:{
+            toolbarClick: function(args) {
+              if (args.item.id === 'mainGrid_excelexport') {
+                  this.$refs.MainGrid.excelExport();
+                  var x=this.$refs.MainGrid;
+              }
+            },
             created() { 
-              var gridOj =this.$refs.LiorGrid;  
+              var gridOj =this.$refs.MainGrid;  
               UsersData.GetUsersData(gridOj);
             },
-      }
+        
+        }
     } );
       
  

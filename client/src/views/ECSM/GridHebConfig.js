@@ -10,8 +10,8 @@ module.exports = {
             'OKButton': 'אישור',
             'CancelButton': 'ביטול',
             'FilterButton': 'סנן',
-            'ClearButton': 'נקה'
-
+            'ClearButton': 'נקה',
+            'Excelexport': 'Excel'
         }
     }
 };
