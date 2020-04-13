@@ -1,6 +1,6 @@
 <template>
   <div class="UsersGrid">
-    <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='created' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' > 
+    <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' > 
       <e-columns>
         <e-column field='ID'  headerText='ID' textAlign='Right' width=60 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
         <e-column field='First' headerText='שם פרטי' textAlign='Right' width=100></e-column>
@@ -58,7 +58,7 @@ export default Vue.extend({
                   var x=this.$refs.MainGrid; //Usless, but somehow mak it work 
               }
             },
-            created() { 
+            GridCreated() { 
               var gridOj =this.$refs.MainGrid;  
               GetDataServices.GetDataForGrid(gridOj,'UsersAPI');
             },
