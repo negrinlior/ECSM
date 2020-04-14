@@ -41,9 +41,6 @@ class GetDataServices {
 
       return axios.get(ServerConfig.FKeysListsAPI + typ + '/')
                     .then(response => {
-                      //gridObj.dataSource.Customers = response.data; 
-                     // gridObj.refreshColumns();   
-                      //alert(JSON.stringify(response.data));
                       return response.data; 
                     })
                     .catch(e => {

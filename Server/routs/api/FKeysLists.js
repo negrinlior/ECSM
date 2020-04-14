@@ -24,5 +24,58 @@ router.get('/Customers',async function(req,res){
 
 });
 
+router.get('/Anafim',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT ID,Anaf as "anafnm" FROM Anafim');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
+
+router.get('/Kablanim',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT MisparKablan,Name FROM Kablanim');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
+
+router.get('/Mishtamshim',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT ID,[User] FROM Users');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
 
 module.exports=router;

@@ -4,7 +4,7 @@ const config = require('../../config');
 const SQL=require("mssql");
 
 const router=express.Router();
-const SelectQry=`SELECT * FROM Permissions`;
+const SelectQry=`SELECT [ID],[Customer],[Anaf],[Kablan],[Rashuiot],[[User] as 'User1',[Backup User] as 'User2',[Backup User 2] as 'User3' FROM [Permissions]`;
 
 
 router.get('/',async function(req,res){  
@@ -25,30 +25,30 @@ router.get('/',async function(req,res){
 
 });
 
-router.post('/UpdateUser',async function(req,res){
+router.post('/UpdatePermissions',async function(req,res){
     try{
         var sqlreq= new SQL.Request();
         var Bdy=await req.body.value;
-        
-        sqlreq.input('IDUser',SQL.Int,Bdy.ID);
-        sqlreq.input('User',SQL.NVarChar,Bdy.User);
-        sqlreq.input('First',SQL.NVarChar,Bdy.First);
-        sqlreq.input('Last',SQL.NVarChar,Bdy.Last);
-        sqlreq.input('Team',SQL.Int,Bdy.Team);
-        sqlreq.input('PassWord',SQL.NVarChar,Bdy.PassWord);
-        sqlreq.input('Email',SQL.NVarChar,Bdy.Email);
-        sqlreq.input('Phone',SQL.NVarChar,Bdy.Phone);
-        sqlreq.output('Success', SQL.Int)
 
-        var data=await DB.ExecuteSP(sqlreq,"ECSM_UsersTableUpdate");
+        sqlreq.input('ID',SQL.Int,Bdy.ID);
+        sqlreq.input('Customer',SQL.Int,Bdy.Customer);
+        sqlreq.input('Anaf',SQL.Int,Bdy.Anaf);
+        sqlreq.input('Kablan',SQL.Int,Bdy.Kablan);
+        sqlreq.input('Rashuiot',SQL.Int,Bdy.Rashuiot);
+        sqlreq.input('UserName',SQL.Int,Bdy.User1);
+        sqlreq.input('BackupUser',SQL.Int,Bdy.User2);
+        sqlreq.input('BackupUser2',SQL.Int,Bdy.User3);
+        sqlreq.output('Success', SQL.Int)
+        
+        var data=await DB.ExecuteSP(sqlreq,"ECSM_PermissionsTableUpdate");
         if (data.output.Success=1 && data.rowsAffected[0]>0){
             res.send(JSON.stringify(Bdy));
         }
         else
         {
-            Bdy.User='ERR'
-            Bdy.First='שגיאה';
-            Bdy.Last='לא נשמר';
+            Bdy.User1='ERR'
+            Bdy.Customer='שגיאה';
+            Bdy.Anaf='לא נשמר';
             res.send(JSON.stringify(Bdy));
         }
        
@@ -58,21 +58,21 @@ router.post('/UpdateUser',async function(req,res){
     }   
 });
 
-router.post('/InsertUser',async function(req,res){
+router.post('/InsertPermissions',async function(req,res){
     try{
         var sqlreq= new SQL.Request();
         var Bdy=await req.body.value;
         
-        sqlreq.input('User',SQL.NVarChar,Bdy.User);
-        sqlreq.input('First',SQL.NVarChar,Bdy.First);
-        sqlreq.input('Last',SQL.NVarChar,Bdy.Last);
-        sqlreq.input('Team',SQL.Int,Bdy.Team);
-        sqlreq.input('PassWord',SQL.NVarChar,Bdy.PassWord);
-        sqlreq.input('Email',SQL.NVarChar,Bdy.Email);
-        sqlreq.input('Phone',SQL.NVarChar,Bdy.Phone);
+        sqlreq.input('Customer',SQL.Int,Bdy.Customer);
+        sqlreq.input('Anaf',SQL.Int,Bdy.Anaf);
+        sqlreq.input('Kablan',SQL.Int,Bdy.Kablan);
+        sqlreq.input('Rashuiot',SQL.Int,Bdy.Rashuiot);
+        sqlreq.input('UserName',SQL.Int,Bdy.User1);
+        sqlreq.input('BackupUser',SQL.Int,Bdy.User2);
+        sqlreq.input('BackupUser2',SQL.Int,Bdy.User3);
         sqlreq.output('Success', SQL.Int)
 
-        var data=await DB.ExecuteSP(sqlreq,"ECSM_UsersTableInsert");
+        var data=await DB.ExecuteSP(sqlreq,"ECSM_PermissionsTableInsert");
         if (data.output.Success=1 && data.rowsAffected[0]>0){
             Bdy.ID=data.returnValue;
             res.send(JSON.stringify(Bdy));
@@ -88,16 +88,16 @@ router.post('/InsertUser',async function(req,res){
     }   
 });
 
-router.post('/DeleteUser',async function(req,res){
+router.post('/DeletePermissions',async function(req,res){
     try{
         var sqlreq= new SQL.Request();
         var Bdy=await req.body;
         
-        sqlreq.input('IDUser',SQL.Int,Bdy.key);
+        sqlreq.input('IDper',SQL.Int,Bdy.key);
        
         sqlreq.output('Success', SQL.Int)
 
-        var data=await DB.ExecuteSP(sqlreq,"ECSM_UsersTableDelete");
+        var data=await DB.ExecuteSP(sqlreq,"ECSM_PermissionsTableDelete");
         if (data.output.Success=1 && data.rowsAffected[0]>0){
             
             res.send(JSON.stringify(Bdy));

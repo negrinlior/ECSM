@@ -11,7 +11,26 @@ module.exports = {
             'CancelButton': 'ביטול',
             'FilterButton': 'סנן',
             'ClearButton': 'נקה',
-            'Excelexport': 'Excel'
+            'Excelexport': 'Excel',
+            'ClearFilter': 'נקה פילטר',
+            'NumberFilter': 'פילטר מספרים',
+            'TextFilter': 'פילטר טקסט',
+            'DateFilter': 'פילטר תאריך',
+            'Equal': 'שווה',
+            'NotEqual': 'אינו שווה',
+            'LessThan': 'פחות מ',
+            'LessThanOrEqual': 'פחות או שווה ל',
+            'GreaterThan': 'גדול מ',
+            'GreaterThanOrEqual': 'גדול או שווה ל',
+            'ChooseDate': 'בחר תאריך',
+            'EnterValue': 'הכנס ערך',
+            'StartsWith': 'מתחיל ב',
+            'EndsWith': 'נגמב ר',
+            'Contains': 'מכיל',
+            'CustomFilter': 'מותאם אישית',
+            'CustomFilterPlaceHolder': 'הכנס ערך',
+            'CustomFilterDatePlaceHolder': 'בחר תאריך',
+            
         }
     }
 };

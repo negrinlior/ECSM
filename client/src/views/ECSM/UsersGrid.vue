@@ -42,7 +42,7 @@ export default Vue.extend({
                   removeUrl: ServerConfig.UsersAPI + 'DeleteUser',
                 }), 
                 filterOptions: {
-                  type: 'CheckBox'
+                  type: 'Excel'
                 },
                 toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'ExcelExport'],
                 editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, showDeleteConfirmDialog: true },
