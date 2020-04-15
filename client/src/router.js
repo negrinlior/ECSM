@@ -44,6 +44,14 @@ const RTR= new Router({
         requiresAuth: false
       }
     },
+    {
+      path: '/Bdikot',
+      name: 'Bdikot',
+      component: () => import('./views/ECSM/Bdikot.vue'),
+      meta: { 
+        requiresAuth: false
+      }
+    },
   ]
 })
 

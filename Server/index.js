@@ -16,6 +16,7 @@ app.use(cors());
     const postLogin=require('./routs/api/login');
     const UsersAPI=require('./routs/api/UserList');
     const HaktzaatBdikotAPI=require('./routs/api/HaktzaatBdikot');
+    const BdikotAPI=require('./routs/api/Bdikot');
     const FKeysListsAPI=require('./routs/api/FKeysLists');
 
     //Routh routing
@@ -23,6 +24,7 @@ app.use(cors());
     app.use('/api/login',postLogin);
     app.use('/api/UsersAPI',UsersAPI);
     app.use('/api/HaktzaatBdikotAPI',HaktzaatBdikotAPI);
+    app.use('/api/BdikotAPI',BdikotAPI);
     app.use('/api/FKeysLists',FKeysListsAPI);
 
 

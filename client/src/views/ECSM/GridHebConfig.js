@@ -25,7 +25,7 @@ module.exports = {
             'ChooseDate': 'בחר תאריך',
             'EnterValue': 'הכנס ערך',
             'StartsWith': 'מתחיל ב',
-            'EndsWith': 'נגמב ר',
+            'EndsWith': 'נגמר ב',
             'Contains': 'מכיל',
             'CustomFilter': 'מותאם אישית',
             'CustomFilterPlaceHolder': 'הכנס ערך',

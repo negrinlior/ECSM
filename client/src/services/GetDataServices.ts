@@ -24,7 +24,6 @@ class GetDataServices {
     //Get Data for grid
     static GetDataForGrid(grid: any,typ: string){
       var gridObj = grid 
-      
       return axios.get(ServerConfig.ServerAPI + typ + '/')
                     .then(response => {
                       gridObj.dataSource.dataSource.json = response.data; 

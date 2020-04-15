@@ -1,5 +1,4 @@
 <template>
-  <!-- FK: MisparKablan, ID ANAF, ID CUSTOMER, MISPAR RASHUT-->
     <div v-if="isLoades" class="HaktzaatBdikot">
       <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' > 
         <e-columns>
@@ -25,8 +24,6 @@
     import GetDataServices from '../../services/GetDataServices';
     import HebConf from './GridHebConfig.js';
     import ServerConfig from '../../ServerConfig';
-
-    var CustomersList=[];
 
     setCulture('he-IL');
     L10n.load(HebConf);

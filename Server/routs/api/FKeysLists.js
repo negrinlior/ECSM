@@ -78,4 +78,40 @@ router.get('/Mishtamshim',async function(req,res){
 
 });
 
+router.get('/Rashuiot',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT ID,[Name] as "RNm" FROM Rashuiot');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
+
+router.get('/StageList',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT Code,StageName FROM StageList');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
+
 module.exports=router;
