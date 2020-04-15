@@ -4,7 +4,7 @@ const config = require('../../config');
 const SQL=require("mssql");
 
 const router=express.Router();
-const SelectQry=`SELECT TOP 100 ID,Kablan,Rishayon,KablanSecondary,RishayonSecondary,Rashut,Mechraz,DateCreation,DateRangeText,StageCode,SrcFile,CustomerID,Anaf,BdikatAvID,SugBdikaMeuchedet FROM Bdikot ORDER BY ID DESC`;
+const SelectQry=`SELECT ID,Kablan,Rishayon,KablanSecondary,RishayonSecondary,Rashut,Mechraz,DateCreation,DateRangeText,StageCode,SrcFile,CustomerID,Anaf,BdikatAvID,SugBdikaMeuchedet FROM Bdikot ORDER BY ID DESC`;
 
 
 router.get('/',async function(req,res){  

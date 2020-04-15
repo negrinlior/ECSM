@@ -1,7 +1,7 @@
 <template>
   <!-- FK: MisparKablan, ID ANAF, ID CUSTOMER, ID RASHUT-->
     <div v-if="isLoades" class="Bdikot">
-      <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' > 
+      <ejs-grid id='mainGrid' ref='MainGrid' height=420  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' :allowPaging="true" :pageSettings='pageSettings'> 
         <e-columns>
           <e-column field='ID'  headerText='ID' textAlign='Right' width=90 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
           <e-column field='Kablan' headerText='קבלן' textAlign='Right' width=250 foreignKeyField='MisparKablan' foreignKeyValue='Name' :dataSource='Kablanim'></e-column>
@@ -26,7 +26,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created,Page } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import GetDataServices from '../../services/GetDataServices';
     import HebConf from './GridHebConfig.js';
@@ -63,10 +63,12 @@ export default Vue.extend({
                         // toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'ExcelExport'],
                         toolbar: ['Edit', 'Delete', 'Update', 'Cancel', 'ExcelExport'],
                         editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, showDeleteConfirmDialog: true },
+                        
+                         pageSettings: { pageSizes: [25,50,100], pageSize:50  }
                       };
         },
       provide: {
-        grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey]       
+        grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey,Page]       
       },
       methods:{
             toolbarClick: function(args) {

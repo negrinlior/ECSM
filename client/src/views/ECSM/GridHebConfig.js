@@ -30,7 +30,18 @@ module.exports = {
             'CustomFilter': 'מותאם אישית',
             'CustomFilterPlaceHolder': 'הכנס ערך',
             'CustomFilterDatePlaceHolder': 'בחר תאריך',
-            
+            'FirstPage': 'עמוד ראשון',
+            'LastPage': 'עמוד אחרון',
+            'PreviousPage': 'עמוד קודם',
+            'NextPage': 'עמוד הבא',
+            'currentPageInfo': '{0} מתוך {1} עמודים',
+            'totalItemsInfo': '({0} פריטים)',
+            'Item': 'פריט',
+            'Items': 'פריטים',
+            'pagerDropDown': 'פריטים לעמוד',
+            'pagerAllDropDown': 'פריטים',
+            'All': 'הכל',
+
         }
     }
 };
