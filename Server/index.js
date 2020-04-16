@@ -18,6 +18,7 @@ app.use(cors());
     const HaktzaatBdikotAPI=require('./routs/api/HaktzaatBdikot');
     const BdikotAPI=require('./routs/api/Bdikot');
     const FKeysListsAPI=require('./routs/api/FKeysLists');
+    const FileUploadAPI=require('./routs/api/FileUpload');
 
     //Routh routing
     app.use('/',GetsVersion);
@@ -26,6 +27,7 @@ app.use(cors());
     app.use('/api/HaktzaatBdikotAPI',HaktzaatBdikotAPI);
     app.use('/api/BdikotAPI',BdikotAPI);
     app.use('/api/FKeysLists',FKeysListsAPI);
+    app.use('/api/FileUpload',FileUploadAPI);
 
 
 //Run server

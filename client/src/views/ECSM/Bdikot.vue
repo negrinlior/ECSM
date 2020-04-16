@@ -20,6 +20,8 @@
           <e-column field='SrcFile' headerText='קובץ מקור' textAlign='Right' width=220 :allowEditing ='false'></e-column>
         </e-columns>
       </ejs-grid>
+
+      <input type="file" ref="BdikotFileUploadPTH" style="display: none" v-on:change="UploadBdikotFile()">
     </div>
 </template>
 
@@ -29,6 +31,7 @@
     import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created,Page } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import GetDataServices from '../../services/GetDataServices';
+    import FileUploadServices from '../../services/FileServices';
     import HebConf from './GridHebConfig.js';
     import ServerConfig from '../../ServerConfig';
 
@@ -60,8 +63,10 @@ export default Vue.extend({
                         filterOptions: {
                           type: 'Excel'
                         },
-                        // toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'ExcelExport'],
-                        toolbar: ['Edit', 'Delete', 'Update', 'Cancel', 'ExcelExport'],
+                        toolbar: ['Edit', 'Delete', 'Update', 'Cancel', 'ExcelExport',
+                                 {text: 'טעינת בדיקות', tooltipText: 'טעינת בדיקות', prefixIcon: 'e-icons e-upload', id: 'UpldFile' , align:'Right'},
+                                 {text: 'נקה הכל', tooltipText: 'נקה הכל', prefixIcon: 'e-icons e-unfilter', id: 'ClearAllFilters' , align:'Right'}
+                                 ],
                         editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, showDeleteConfirmDialog: true },
                         
                          pageSettings: { pageSizes: [25,50,100], pageSize:50  }
@@ -71,15 +76,26 @@ export default Vue.extend({
         grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey,Page]       
       },
       methods:{
-            toolbarClick: function(args) {
+            toolbarClick: async function(args) {
               if (args.item.id === 'mainGrid_excelexport') {
                   this.$refs.MainGrid.excelExport();
                   var x=this.$refs.MainGrid; //Usless, but somehow mak it work 
+              }
+              if (args.item.id === "ClearAllFilters"){
+                  this.$refs.MainGrid.clearFiltering();
+              }
+              if (args.item.id === "UpldFile"){
+                  this.$refs.BdikotFileUploadPTH.click(); //Open file dialog
               }
             },
             async GridCreated() { 
               var gridOj =this.$refs.MainGrid;  
               GetDataServices.GetDataForGrid(gridOj,'BdikotAPI');
+            },
+            async UploadBdikotFile() { 
+                //  let formData = new FormData();
+                //  formData.append('file1', this.$refs.BdikotFileUploadPTH.files[0]);
+                 FileUploadServices.UploadBdikot(this.$refs.BdikotFileUploadPTH.files[0]);
             },
       },
 
@@ -109,5 +125,12 @@ export default Vue.extend({
     @import '../../../node_modules/@syncfusion/ej2-popups/styles/material.css'; 
     @import '../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css'; 
     @import "../../../node_modules/@syncfusion/ej2-vue-grids/styles/material.css"; 
+    @import "../../../node_modules/@syncfusion/ej2-vue-grids/styles/material.css"; 
+    .e-unfilter:before{
+        content:'\ea82';
+    }
+   .e-upload:before{
+       content: '\e60f';
+    }
 </style>
 

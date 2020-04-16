@@ -5,4 +5,5 @@ module.exports = {
     'HaktzaatBdikotAPI': 'http://localhost:5000/api/HaktzaatBdikotAPI/',
     'BdikotAPI': 'http://localhost:5000/api/BdikotAPI/',
     'FKeysListsAPI': 'http://localhost:5000/api/FKeysLists/',
+    'FileUploadAPI': 'http://localhost:5000/api/FileUpload/',
 };
