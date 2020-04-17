@@ -46,6 +46,9 @@ router.post('/UploadBdikot',Upload.single('file1'),async function(req,res){
             if (err) throw err;
         });
         
+        //Delete SRC file
+        fs.unlinkSync(req.file.path);
+
         //RUN SP
         var sqlreq= new SQL.Request();
         sqlreq.input('FilePTH',SQL.NVarChar,'C');
@@ -59,6 +62,7 @@ router.post('/UploadBdikot',Upload.single('file1'),async function(req,res){
         {
             res.send(JSON.stringify({Success:-1,Reason:'Execute Fail'}));
         }
+
     }catch(err){
         console.log(err);
         res.send(JSON.stringify({Success:-1,Reason:'Connection Fail'}));
