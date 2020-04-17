@@ -93,9 +93,8 @@ export default Vue.extend({
               GetDataServices.GetDataForGrid(gridOj,'BdikotAPI');
             },
             async UploadBdikotFile() { 
-                //  let formData = new FormData();
-                //  formData.append('file1', this.$refs.BdikotFileUploadPTH.files[0]);
-                 FileUploadServices.UploadBdikot(this.$refs.BdikotFileUploadPTH.files[0]);
+                var x=await FileUploadServices.UploadBdikot(this.$refs.BdikotFileUploadPTH.files[0]);
+                this.GridCreated();
             },
       },
 

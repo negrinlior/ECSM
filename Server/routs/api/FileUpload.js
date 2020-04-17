@@ -1,33 +1,67 @@
+//Express
 const express=require('express');
+const router=express.Router();
+
+//DB
 const DB=require('../DB');
 const config = require('../../config');
 const SQL=require("mssql");
 
-const router=express.Router();
+//Uploads
+const Multer=require('multer');
+const storage = Multer.diskStorage({ //How to store
+                                        destination: function(req, file, cb) {
+                                        cb(null, './uploads/');
+                                        },
+                                        filename: function(req, file, cb) {
+                                        cb(null, file.originalname);
+                                        }
+                                    });
+const fileFilter = (req, file, cb) => { //FilteroutFiles
+                                        // Accept only xlsx,csv,txt
+                                        if (file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' 
+                                            || file.mimetype === 'application/vnd.ms-excel'
+                                            || file.mimetype === 'text/plain') {
+                                          cb(null, true);
+                                        } else {
+                                          cb('Unsupported Format', false);
+                                        }
+                                      };
+const Upload=Multer({
+                        storage: storage,
+                        limits: { //5 MB - size is in bits
+                        fileSize: 1024 * 1024 * 5
+                        },
+                        fileFilter: fileFilter
+                    });
 
 
-router.post('/UploadBdikot',async function(req,res){
+// ********************     API     ******************************************************
+
+router.post('/UploadBdikot',Upload.single('file1'),async function(req,res){
     try{
+        var fs = require('fs');
+        // SRc,DST,ERROR   -   destination.txt will be created or overwritten by default.
+        await fs.copyFile(req.file.path, config.BdikotFilePTH, (err) => {
+            if (err) throw err;
+        });
+        
+        //RUN SP
         var sqlreq= new SQL.Request();
-        var Bdy=await req.body;
-        console.log(Bdy);
-        console.log('***********************');
-        console.log(JSON.stringify(Bdy));
-        if (0>1){
-                    sqlreq.output('Success', SQL.Int)
-                    
-                    var data=await DB.ExecuteSP(sqlreq,"BdikotLoad");
-                    if (data.output.Success=1 && data.rowsAffected[0]>0){
-                        res.send({Success:1,Reason:'Execute Success'});
-                    }
-                    else
-                    {
-                        res.send(JSON.stringify({Success:-1,Reason:'Execute Fail'}));
-                    }
-                }
+        sqlreq.input('FilePTH',SQL.NVarChar,'C');
+        sqlreq.output('SuccessOutput', SQL.Int)
+        
+        var data=await DB.ExecuteSP(sqlreq,"BdikotLoad");
+        if (data.output.SuccessOutput=1){
+            res.send({Success:1,Reason:'Execute Success'});
+        }
+        else
+        {
+            res.send(JSON.stringify({Success:-1,Reason:'Execute Fail'}));
+        }
     }catch(err){
         console.log(err);
-        res.send(err);
+        res.send(JSON.stringify({Success:-1,Reason:'Connection Fail'}));
     }   
 });
 

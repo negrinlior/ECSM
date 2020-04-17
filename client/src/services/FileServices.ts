@@ -6,29 +6,31 @@ import ServerConfig from '../ServerConfig.js';
 class FileServices {
     //UploadBdikot
     static async UploadBdikot(Fil){
+
       var x=await Fil;
-      const FormData = require('form-data');
       let formData = new FormData();
-      formData.append('file', x);
-      // {
-      //   'Content-Type':  formData.getHeaders()['content-type']
-      //           }
-      axios.post( ServerConfig.FileUploadAPI  + 'UploadBdikot/',
-                {file:x,ID:1}
-                ).then(function(){
-                  alert('SUCCESS!!');
+      formData.append('file1', x);
+
+      await axios.post( ServerConfig.FileUploadAPI  + 'UploadBdikot/',
+                formData
+                ).then(response=>{
+                  if (response.data.Success==1){
+                      alert('נטען בהצלחה');
+                  }else{
+                      alert('ERROR : ' + response.data.Reason);
+                  }
+                  
                 })
-                .catch(function(){
-                  alert('FAILURE!!');
+                .catch(e => {
+                  alert('F' + e);
                 });
-      /* return axios.get(ServerConfig.FileUploadAPI + typ + '/')
-                    .then(response => {
-                      return response.data; 
-                    })
-                    .catch(e => {
-                      alert('F' + e);
-                    }) */
+      return 1;
     }
-}
+
+  
+
+  }
+
+
 
 export default FileServices;
