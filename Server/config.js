@@ -3,8 +3,9 @@ module.exports = {
     'PrivateKey': 'supersecretECS',
 
     // ============    DB CONFIGURATION    ============
-    //'DBserver':'DESKTOP-CDGMIRH\\ECS',
-    'DBserver':'DESKTOP-F0563OT\\SQLEXPRESS',
+    //'DBserver':'DESKTOP-CDGMIRH\\ECS', - lior
+    //'DBserver':'DESKTOP-F0563OT\\SQLEXPRESS', - ariel
+    'DBserver':'רחלי\\SQLEXPRESS',
     'DBName':'MALAB',
     'DBUser':'ECSMUser',
     'DBPassword':'ECSMUser',

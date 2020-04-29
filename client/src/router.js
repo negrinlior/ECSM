@@ -52,6 +52,14 @@ const RTR= new Router({
         requiresAuth: false
       }
     },
+    {
+      path: '/Nikud',
+      name: 'Nikud',
+      component: () => import('./views/ECSM/Nikud.vue'),
+      meta: { 
+        requiresAuth: false
+      }
+    },
   ]
 })
 

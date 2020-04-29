@@ -89,6 +89,7 @@ export default {
             { title: 'משתמשים', icon: 'face', adrs: '/UsersGrid' },
             { title: 'הקצאת בדיקות', icon: 'how_to_reg', adrs: '/HaktzaatBdikot' },
             { title: 'ניהול בדיקות', icon: 'book', adrs: '/Bdikot' },
+            { title: 'ניקוד', icon: 'book', adrs: '/Nikud' },
             { title: 'אודות', icon: 'question_answer', adrs: '/about' }
         ]
       }

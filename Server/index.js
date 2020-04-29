@@ -13,21 +13,25 @@ app.use(cors());
 //Midleware
     //File routs
     const GetsVersion=require('./Version/version.js');
+    const FKeysListsAPI=require('./routs/api/FKeysLists');
+    const FileUploadAPI=require('./routs/api/FileUpload');
     const postLogin=require('./routs/api/login');
     const UsersAPI=require('./routs/api/UserList');
     const HaktzaatBdikotAPI=require('./routs/api/HaktzaatBdikot');
     const BdikotAPI=require('./routs/api/Bdikot');
-    const FKeysListsAPI=require('./routs/api/FKeysLists');
-    const FileUploadAPI=require('./routs/api/FileUpload');
+    const NikudAPI=require('./routs/api/Nikud');
+
 
     //Routh routing
     app.use('/',GetsVersion);
+    app.use('/api/FKeysLists',FKeysListsAPI);
+    app.use('/api/FileUpload',FileUploadAPI);
     app.use('/api/login',postLogin);
     app.use('/api/UsersAPI',UsersAPI);
     app.use('/api/HaktzaatBdikotAPI',HaktzaatBdikotAPI);
     app.use('/api/BdikotAPI',BdikotAPI);
-    app.use('/api/FKeysLists',FKeysListsAPI);
-    app.use('/api/FileUpload',FileUploadAPI);
+    app.use('/api/NikudAPI',NikudAPI);
+    
 
 
 //Run server
