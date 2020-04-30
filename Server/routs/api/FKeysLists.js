@@ -114,4 +114,62 @@ router.get('/StageList',async function(req,res){
 
 });
 
+
+router.get('/NikudObjectList',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT Code,Description FROM ObjectType');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
+
+
+router.get('/NikudType',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT Code,Description FROM NikudType');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
+
+
+router.get('/MathActions',async function(req,res){  
+    try{
+        var data=await DB.CommitSelectAndReturnRecordset('SELECT Code,Description FROM MathActions');
+        if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+       
+        
+    }catch(err){
+        res.send(err);
+    }   
+
+});
+
+
 module.exports=router;

@@ -4,15 +4,14 @@
       <ejs-grid id='mainGrid' ref='MainGrid' height=420  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' :allowPaging="true" :pageSettings='pageSettings'> 
         <e-columns>
           <e-column field='ID'  headerText='ID' textAlign='Right' width=90 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
-          <e-column field='ObjectType' headerText='סוג אובייקט לניקוד' textAlign='Right' width=250 foreignKeyField='MisparKablan' foreignKeyValue='Name' :dataSource='Kablanim'></e-column>
-          <e-column field='ObjectCode' headerText='אובייקט לניקוד' textAlign='Right' width=80 foreignKeyField='ID' foreignKeyValue='Disp' :dataSource='YesNoList'></e-column>
-          <e-column field='DateStart' headerText='מתאריך' textAlign='Right' width=150></e-column>
-          <e-column field='DateEnd' headerText='עד תאריך' textAlign='Right' width=150></e-column>
-          <e-column field='NikudType' headerText='אובייקט לניקוד' textAlign='Right' width=150></e-column>
+          <e-column field='NikudType' headerText='אובייקט לניקוד' textAlign='Right' width=180 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='NikudTypeList'></e-column>
+          <e-column field='ObjectType' headerText='סוג אובייקט לניקוד' textAlign='Right' width=200 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='NikudObjectList'></e-column>
+          <e-column field='ObjectCode' headerText='אובייקט' textAlign='Right' width=150></e-column>
+          <e-column field='DateStart' headerText='מתאריך' textAlign='Right' width=150 :format='formatOptions' type='date'></e-column>
+          <e-column field='DateEnd' headerText='עד תאריך' textAlign='Right' width=150 :format='formatOptions' type='date'></e-column>
           <e-column field='NikudValue' headerText='ניקוד' textAlign='Right' width=150></e-column>
           <e-column field='Machpil' headerText='מכפיל' textAlign='Right' width=150></e-column>
-          <e-column field='MathAction' headerText='פעולה חשבונית' textAlign='Right' width=150></e-column>
-         
+          <e-column field='MathAction' headerText='פעולה חשבונית' textAlign='Right' width=150 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='MathActionList'></e-column>
         </e-columns>
       </ejs-grid>
 
@@ -47,13 +46,9 @@ export default Vue.extend({
                           removeUrl: ServerConfig.NikudAPI + 'DeleteNikud',
                         }), 
                         formatOptions: {type:'date', format:'dd/MM/yyyy'},
-                        Kablanim:[],
-                        YesNoList:[{ID:'כן',Disp:'כן'},{ID:'לא',Disp:'לא'}],
-                        SugBdikaMeiuhedetList:[{ID:'מורחבת',Disp:'מורחבת'},{ID:' ',Disp:''}],
-                        RashuiotLst:[],
-                        Customers:[],
-                        Anafim:[],
-                        StagesList:[],
+                        NikudObjectList:[],
+                        NikudTypeList:[],
+                        MathActionList:[],
                         isLoades:false,
                         filterOptions: {
                           type: 'Excel'
@@ -87,8 +82,10 @@ export default Vue.extend({
 
       //Get forigin keys on component creation
       created: async function(){
-          this.Kablanim=await GetDataServices.GetFkeyList('Kablanim');  
-          
+          this.NikudObjectList=await GetDataServices.GetFkeyList('NikudObjectList');  
+          this.NikudTypeList=await GetDataServices.GetFkeyList('NikudType');  
+          this.MathActionList=await GetDataServices.GetFkeyList('MathActions');  
+
           this.isLoades=true;  //ok can render coponent
       },
       
