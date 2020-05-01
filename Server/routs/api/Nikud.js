@@ -4,7 +4,7 @@ const config = require('../../config');
 const SQL=require("mssql");
 
 const router=express.Router();
-const SelectQry=`SELECT * FROM [Nikud]`;
+const SelectQry=`SELECT * FROM ECSM_NikudSettingsView`;
 
 
 router.get('/',async function(req,res){  
@@ -29,28 +29,31 @@ router.post('/UpdateNikud',async function(req,res){
     try{
         var sqlreq= new SQL.Request();
         var Bdy=await req.body.value;
-
+        console.log(Bdy);
         sqlreq.input('ID',SQL.Int,Bdy.ID);
-        sqlreq.input('Customer',SQL.Int,Bdy.Customer);
-        sqlreq.input('Anaf',SQL.Int,Bdy.Anaf);
-        sqlreq.input('Kablan',SQL.Int,Bdy.Kablan);
-        sqlreq.input('Rashuiot',SQL.Int,Bdy.Rashuiot);
-        sqlreq.input('UserName',SQL.Int,Bdy.User1);
-        sqlreq.input('BackupUser',SQL.Int,Bdy.User2);
-        sqlreq.input('BackupUser2',SQL.Int,Bdy.User3);
+        sqlreq.input('ObjectTypeDis',SQL.NVarChar,Bdy.ObjectType);
+        sqlreq.input('ObjectCodeDis',SQL.NVarChar,Bdy.ObjCodeDis);
+        sqlreq.input('DateStart',SQL.NVarChar,Bdy.DateStart);
+        sqlreq.input('DateEnd',SQL.NVarChar,Bdy.DateEnd);
+        sqlreq.input('NikudType',SQL.Int,Bdy.NikudType);
+        sqlreq.input('NikudValue',SQL.Int,Bdy.NikudValue);
+        sqlreq.input('Machpil',SQL.Int,Bdy.Machpil);
+        sqlreq.input('MathAction',SQL.Int,Bdy.MathAction);
+        
         sqlreq.output('Success', SQL.Int)
         
-        var data=await DB.ExecuteSP(sqlreq,"ECSM_PermissionsTableUpdate");
-        if (data.output.Success=1 && data.rowsAffected[0]>0){
-            res.send(JSON.stringify(Bdy));
-        }
-        else
-        {
-            Bdy.User1='ERR'
-            Bdy.Customer='שגיאה';
-            Bdy.Anaf='לא נשמר';
-            res.send(JSON.stringify(Bdy));
-        }
+         var data=await DB.ExecuteSP(sqlreq,"ECSM_NikudTableUpdate");
+        console.log(data);
+
+         if (data.output.Success=1 && data.rowsAffected[0]>0){
+             res.send(JSON.stringify(Bdy));
+         }
+         else
+         {
+             Bdy.ObjectType=null;
+             Bdy.ObjectCodeDis='לא נשמר';
+             res.send(JSON.stringify(Bdy));
+         }
        
     }catch(err){
         console.log(err);

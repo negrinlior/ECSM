@@ -1,13 +1,12 @@
 <template>
-  <!-- FK: MisparKablan, ID ANAF, ID CUSTOMER, ID RASHUT-->
     <div v-if="isLoades" class="Nikud">
-      <ejs-grid id='mainGrid' ref='MainGrid' height=420  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' :allowPaging="true" :pageSettings='pageSettings'> 
+      <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' > 
         <e-columns>
           <e-column field='ID'  headerText='ID' textAlign='Right' width=90 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
-          <e-column field='NikudType' headerText='אובייקט לניקוד' textAlign='Right' width=180 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='NikudTypeList'></e-column>
-          <e-column field='ObjectType' headerText='סוג אובייקט לניקוד' textAlign='Right' width=200 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='NikudObjectList'></e-column>
-          <e-column field='ObjectCode' headerText='אובייקט' textAlign='Right' width=150></e-column>
-          <e-column field='DateStart' headerText='מתאריך' textAlign='Right' width=150 :format='formatOptions' type='date'></e-column>
+          <e-column field='NikudType' headerText='אובייקט לניקוד' textAlign='Right' width=150 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='NikudTypeList'></e-column>
+          <e-column field='ObjectType' headerText='סוג אובייקט לניקוד' textAlign='Right' width=185 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='NikudObjectList' :editType='dropdownedit' :edit='ObjTypeParams'></e-column>
+          <e-column field='ObjCodeDis' headerText='אובייקט' textAlign='Right' width=550 :editType='dropdownedit' :edit='ObjParams'></e-column>
+          <e-column field='DateStart' headerText='מתאריך' textAlign='Right' width=150  :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
           <e-column field='DateEnd' headerText='עד תאריך' textAlign='Right' width=150 :format='formatOptions' type='date'></e-column>
           <e-column field='NikudValue' headerText='ניקוד' textAlign='Right' width=150></e-column>
           <e-column field='Machpil' headerText='מכפיל' textAlign='Right' width=150></e-column>
@@ -22,8 +21,10 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created,Page } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
+    import { DropDownList } from "@syncfusion/ej2-dropdowns";
+    import { Query } from '@syncfusion/ej2-data';
     import GetDataServices from '../../services/GetDataServices';
     import FileUploadServices from '../../services/FileServices';
     import HebConf from './GridHebConfig.js';
@@ -31,6 +32,8 @@
 
     setCulture('he-IL');
     L10n.load(HebConf);
+
+    let ObjTElem, ObjElem, ObjTObj, ObjObj;
 
     Vue.use(GridPlugin);
 
@@ -57,12 +60,66 @@ export default Vue.extend({
                                  {text: 'נקה הכל', tooltipText: 'נקה הכל', prefixIcon: 'e-icons e-unfilter', id: 'ClearAllFilters' , align:'Right'}
                                  ],
                         editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, showDeleteConfirmDialog: true },
-                        
-                         pageSettings: { pageSizes: [25,50,100], pageSize:50  }
+                        dpParams: { params: {value: new Date() } },
+
+                        //---------------------
+                        // עמודות תלויות
+                         ObjTypeParams: {
+                                    create: () => {
+                                      ObjTElem = document.createElement('input');
+                                      return ObjTElem;
+                                    },
+                                    read: () => {
+                                      return ObjTObj.text;
+                                    },
+                                    destroy: () => {
+                                      ObjTObj.destroy();
+                                    },
+                                    write: async() => {
+                                      ObjTObj = new DropDownList({
+                                        dataSource: await GetDataServices.GetFkeyList('NikudObjectList'),
+                                        fields: { value: 'Code', text: 'Description' },
+                                        change: () => {
+                                          ObjObj.enabled = true;
+                                          let tempQuery = new Query().where('ObjTypID', 'equal', ObjTObj.value);
+                                          ObjObj.query = tempQuery;
+                                          ObjObj.text = null;
+                                          ObjObj.dataBind();
+                                        },
+                                        placeholder: 'בחר סוג אובייקט לניקוד',
+                                        floatLabelType: 'Never'
+                                      });
+                                    ObjTObj.appendTo(ObjTElem);
+                                    }
+                                  },
+                          ObjParams: {
+                                    create: () => {
+                                      ObjElem = document.createElement('input');
+                                      return ObjElem;
+                                    },
+                                    read: () => {
+                                      return ObjObj.text;
+                                    },
+                                    destroy: () => {
+                                      ObjObj.destroy();
+                                    },
+                                    write: async() => {
+                                        ObjObj = new DropDownList({
+                                        dataSource: await GetDataServices.GetFkeyList('NikudSettingsObjectList'),
+                                        fields: { value: 'ObjID', text: 'ObjName' },
+                                        enabled: false,
+                                        placeholder: 'בחר אובייקט',
+                                        floatLabelType: 'Never'
+                                      });
+                                      ObjObj.appendTo(ObjElem);
+                                    }
+                                  },
+
+                        //-------------------
                       };
         },
       provide: {
-        grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey,Page]       
+        grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey]       
       },
       methods:{
             toolbarClick: async function(args) {
@@ -79,8 +136,7 @@ export default Vue.extend({
               GetDataServices.GetDataForGrid(gridOj,'NikudAPI');
             },
       },
-
-      //Get forigin keys on component creation
+         //Get forigin keys on component creation
       created: async function(){
           this.NikudObjectList=await GetDataServices.GetFkeyList('NikudObjectList');  
           this.NikudTypeList=await GetDataServices.GetFkeyList('NikudType');  
