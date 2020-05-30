@@ -5,7 +5,7 @@ module.exports = {
     // ============    DB CONFIGURATION    ============
     //'DBserver':'DESKTOP-CDGMIRH\\ECS', - lior
     //'DBserver':'DESKTOP-F0563OT\\SQLEXPRESS', - ariel
-    'DBserver':'רחלי\\SQLEXPRESS',
+    'DBserver':'LAPTOP-3IUT6PM0',
     'DBName':'MALAB',
     'DBUser':'ECSMUser',
     'DBPassword':'ECSMUser',
