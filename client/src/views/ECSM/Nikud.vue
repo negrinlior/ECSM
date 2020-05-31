@@ -21,16 +21,17 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin,Page, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import { DropDownList } from "@syncfusion/ej2-dropdowns";
     import { Query } from '@syncfusion/ej2-data';
+    import { DatePicker } from '@syncfusion/ej2-calendars';
     import GetDataServices from '../../services/GetDataServices';
     import FileUploadServices from '../../services/FileServices';
     import HebConf from './GridHebConfig.js';
     import ServerConfig from '../../ServerConfig';
 
-    setCulture('he-IL');
+    //setCulture('he-IL');
     L10n.load(HebConf);
 
     let ObjTElem, ObjElem, ObjTObj, ObjObj;
@@ -60,7 +61,7 @@ export default Vue.extend({
                                  {text: 'נקה הכל', tooltipText: 'נקה הכל', prefixIcon: 'e-icons e-unfilter', id: 'ClearAllFilters' , align:'Right'}
                                  ],
                         editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, showDeleteConfirmDialog: true },
-                        dpParams: { params: {value: new Date() } },
+                        dpParams: { params: { } },
 
                         //---------------------
                         // עמודות תלויות
@@ -119,7 +120,7 @@ export default Vue.extend({
                       };
         },
       provide: {
-        grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey]       
+        grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey,Page]       
       },
       methods:{
             toolbarClick: async function(args) {
@@ -159,7 +160,6 @@ export default Vue.extend({
     @import '../../../node_modules/@syncfusion/ej2-navigations/styles/material.css'; 
     @import '../../../node_modules/@syncfusion/ej2-popups/styles/material.css'; 
     @import '../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css'; 
-    @import "../../../node_modules/@syncfusion/ej2-vue-grids/styles/material.css"; 
     @import "../../../node_modules/@syncfusion/ej2-vue-grids/styles/material.css"; 
     .e-unfilter:before{
         content:'\ea82';

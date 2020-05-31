@@ -10,6 +10,7 @@ module.exports = {
     'DBUser':'ECSMUser',
     'DBPassword':'ECSMUser',
     'DBPort':1433,
+    //'DBPort':1433,
 
     // ============    File CONFIGURATION    ============
     'BdikotFilePTH':'C:\\Lior\\BdikotLoad.csv',
