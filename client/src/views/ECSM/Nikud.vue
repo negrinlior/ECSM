@@ -7,7 +7,7 @@
           <e-column field='ObjectType' headerText='סוג אובייקט לניקוד' textAlign='Right' width=185 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='NikudObjectList' :editType='dropdownedit' :edit='ObjTypeParams'></e-column>
           <e-column field='ObjCodeDis' headerText='אובייקט' textAlign='Right' width=550 :editType='dropdownedit' :edit='ObjParams'></e-column>
           <e-column field='DateStart' headerText='מתאריך' textAlign='Right' width=150  :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
-          <e-column field='DateEnd' headerText='עד תאריך' textAlign='Right' width=150 :format='formatOptions' type='date'></e-column>
+          <e-column field='DateEnd' headerText='עד תאריך' textAlign='Right' width=150 :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
           <e-column field='NikudValue' headerText='ניקוד' textAlign='Right' width=150></e-column>
           <e-column field='Machpil' headerText='מכפיל' textAlign='Right' width=150></e-column>
           <e-column field='MathAction' headerText='פעולה חשבונית' textAlign='Right' width=150 foreignKeyField='Code' foreignKeyValue='Description' :dataSource='MathActionList'></e-column>

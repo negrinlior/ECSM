@@ -6,7 +6,15 @@ const SQL=require("mssql");
 const router=express.Router();
 const SelectQry=`SELECT * FROM ECSM_NikudSettingsView`;
 
-
+function FixDate(DtStr) {
+    var DtNd=DtStr.split('T')[0];
+    if (DtStr.split('T')[1].split(':')[0]!="00"){
+        var d=new Date(DtNd);
+        d.setDate(d.getDate() +1);
+        DtNd=d.toISOString().split('T')[0];
+    }
+    return DtNd;   // The function returns the product of p1 and p2
+  }
 router.get('/',async function(req,res){  
     try{
         var data=await DB.CommitSelectAndReturnRecordset(SelectQry);
@@ -29,12 +37,19 @@ router.post('/UpdateNikud',async function(req,res){
     try{
         var sqlreq= new SQL.Request();
         var Bdy=await req.body.value;
+        var DtStrt=Bdy.DateStart.split('T')[0];
         console.log(Bdy);
+        
         sqlreq.input('ID',SQL.Int,Bdy.ID);
         sqlreq.input('ObjectTypeDis',SQL.NVarChar,Bdy.ObjectType);
         sqlreq.input('ObjectCodeDis',SQL.NVarChar,Bdy.ObjCodeDis);
-        sqlreq.input('DateStart',SQL.NVarChar,Bdy.DateStart);
-        sqlreq.input('DateEnd',SQL.NVarChar,Bdy.DateEnd);
+        sqlreq.input('DateStart',SQL.NVarChar,FixDate(Bdy.DateStart));
+        if (Bdy.DateEnd){
+            sqlreq.input('DateEnd',SQL.NVarChar,DateStart);            
+        }
+        else{
+            sqlreq.input('DateEnd',SQL.NVarChar,Bdy.DateEnd);
+        }
         sqlreq.input('NikudType',SQL.Int,Bdy.NikudType);
         sqlreq.input('NikudValue',SQL.Int,Bdy.NikudValue);
         sqlreq.input('Machpil',SQL.Int,Bdy.Machpil);
@@ -42,6 +57,8 @@ router.post('/UpdateNikud',async function(req,res){
         
         sqlreq.output('Success', SQL.Int)
         
+
+
          var data=await DB.ExecuteSP(sqlreq,"ECSM_NikudTableUpdate");
         console.log(data);
 
