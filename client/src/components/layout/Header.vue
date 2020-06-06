@@ -90,7 +90,9 @@ export default {
             { title: 'הקצאת בדיקות', icon: 'how_to_reg', adrs: '/HaktzaatBdikot' },
             { title: 'ניהול בדיקות', icon: 'book', adrs: '/Bdikot' },
             { title: 'ניקוד', icon: 'pending_actions', adrs: '/Nikud' },
+            { title: 'ניהול תאריכי בדיקות', icon: 'date_range', adrs: '/TarichiBdika' },
             { title: 'אודות', icon: 'question_answer', adrs: '/about' }
+            
         ]
       }
     },

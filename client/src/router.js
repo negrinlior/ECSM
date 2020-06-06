@@ -60,6 +60,14 @@ const RTR= new Router({
         requiresAuth: false
       }
     },
+    {
+      path: '/TarichiBdika',
+      name: 'TarichiBdika',
+      component: () => import('./views/ECSM/TarichiBdika.vue'),
+      meta: { 
+        requiresAuth: false
+      }
+    },
   ]
 })
 
