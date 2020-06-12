@@ -1,17 +1,14 @@
 <template>
-    <div v-if="isLoades" class="TarichiBdika">
+    <div v-if="isLoades" class="NihulShlavimToClient">
       <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' :allowPaging="true" :pageSettings='pageSettings'> 
         <e-columns>
-          <e-column field='ID'  headerText='ID' textAlign='Right' width=90 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
-          <e-column field='BdikotID' headerText='מספר בדיקה' textAlign='Right' width=120 :allowEditing ='false'></e-column>
-          <e-column field='StageCode' headerText='שלב בדיקה' textAlign='Right' width=150 foreignKeyField='Code' foreignKeyValue='StageName' :dataSource='StagesList' :allowEditing ='false'></e-column>
-          <e-column field='StageStatus' headerText='סטטוס בדיקה' textAlign='Right' width=150 :allowEditing ='false'></e-column>
-          <e-column field='StageYaadDateAuto' headerText='תאריך יעד אוטומטי' textAlign='Right' width=150  :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
-          <e-column field='StageYaadDateManual' headerText='תאריך יעד ידני' textAlign='Right' width=150  :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
-          <e-column field='DateYaadSpecial' headerText='תאריך יעד לפי לקוח' textAlign='Right' width=150  :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
-          <e-column field='DateOfPaperWork' headerText='תאריך קבלת מסמכים' textAlign='Right' width=150  :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
-          <e-column field='DateOfHfakatDoch' headerText='תאריך הפקת דוח' textAlign='Right' width=150  :format='formatOptions' type='date' editType= 'datepickeredit' :edit='dpParams'></e-column>
-
+          <e-column field='ID'  headerText='ID' textAlign='Right' width=1 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
+          <e-column field='IDClient' headerText='לקוח' textAlign='Right' width=200 foreignKeyField='ID' foreignKeyValue='CustomerName' :dataSource='Customers' :allowEditing ='false'></e-column>
+          <e-column field='StageCode' headerText='שלב בדיקה' textAlign='Right' width=100 foreignKeyField='Code' foreignKeyValue='StageName' :dataSource='StagesList' :allowEditing ='false'></e-column>
+          <e-column field='DaysForKablanToReturnAnswer' headerText='ימים שיש לקבלן להחזיר תשובה' textAlign='Right' width=120 format='N'></e-column>
+          <e-column field='DaysForHatrahLekablanLefniTarichYaad' headerText='ימי התראה לקבלן לפני תאריך היעד' textAlign='Right' width=120 format='N'></e-column>
+          <e-column field='DaysForMalab' headerText='מספר הימים של מלב להוצאת תגובה' textAlign='Right' width=120 format='N'></e-column>
+          <e-column field='MailCCList' headerText='מכותבים קבועים למייל' textAlign='Right' width=150></e-column>
         </e-columns>
       </ejs-grid>
 
@@ -45,12 +42,13 @@ export default Vue.extend({
                         dataSource: new DataManager({
                           json: [],
                           adaptor: new RemoteSaveAdaptor,
-                          insertUrl: ServerConfig.TarichiBdikaAPI + 'InsertTarichiBdikaAPI',
-                          updateUrl: ServerConfig.TarichiBdikaAPI + 'UpdateTarichiBdikaAPI',
-                          removeUrl: ServerConfig.TarichiBdikaAPI + 'DeleteTarichiBdikaAPI',
+                          insertUrl: ServerConfig.NihulShlavimToClientAPI + 'Irrelevent',
+                          updateUrl: ServerConfig.NihulShlavimToClientAPI + 'UpdateNihulShlavimToClient',
+                          removeUrl: ServerConfig.NihulShlavimToClientAPI + 'Irrelevent2',
                         }), 
                         formatOptions: {type:'date', format:'dd/MM/yyyy'},
                         StagesList:[],
+                        Customers:[],
                         isLoades:false,
                         filterOptions: {
                           type: 'Excel'
@@ -79,13 +77,13 @@ export default Vue.extend({
             },
             async GridCreated() { 
               var gridOj =this.$refs.MainGrid;  
-              GetDataServices.GetDataForGrid(gridOj,'TarichiBdikaAPI');
+              GetDataServices.GetDataForGrid(gridOj,'NihulShlavimToClientAPI');
             },
       },
          //Get forigin keys on component creation
       created: async function(){
           this.StagesList=await GetDataServices.GetFkeyList('StageList');  
-
+          this.Customers=await GetDataServices.GetFkeyList('Customers');  
           this.isLoades=true;  //ok can render coponent
       },
       

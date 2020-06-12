@@ -68,6 +68,14 @@ const RTR= new Router({
         requiresAuth: false
       }
     },
+    {
+      path: '/NihulShlavimToClient',
+      name: 'NihulShlavimToClient',
+      component: () => import('./views/ECSM/NihulShlavimToClient.vue'),
+      meta: { 
+        requiresAuth: false
+      }
+    },
   ]
 })
 

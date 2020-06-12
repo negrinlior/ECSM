@@ -12,7 +12,7 @@ router.get('/',async function(req,res){
     try{
         var data=await DB.CommitSelectAndReturnRecordset(SelectQry);
         if (data.rowsAffected>0){
-            res.send(JSON.stringify(data.recordsets0));
+            res.send(JSON.stringify(data.recordsets[0]));
         }
         else
         {
@@ -26,29 +26,22 @@ router.get('/',async function(req,res){
 
 });
 
-router.post('/UpdateNikud',async function(req,res){
+router.post('/UpdateTarichiBdikaAPI',async function(req,res){
     try{
         var sqlreq= new SQL.Request();
         var Bdy=await req.body.value;
-        
+
         sqlreq.input('vID',SQL.Int,Bdy.ID);
-        sqlreq.input('vObjectTypeDis',SQL.NVarChar,Bdy.ObjectType);
-        sqlreq.input('vObjectCodeDis',SQL.NVarChar,Bdy.ObjCodeDis);
-        sqlreq.input('vDateStart',SQL.NVarChar,OtherFunctions.FixDate(Bdy.DateStart));
-        if (Bdy.DateEnd){
-            sqlreq.input('vDateEnd',SQL.NVarChar,OtherFunctions.FixDate(Bdy.DateEnd));            
-        }
-        else{
-            sqlreq.input('vDateEnd',SQL.NVarChar,Bdy.DateEnd);
-        }
-        sqlreq.input('vNikudType',SQL.Int,Bdy.NikudType);
-        sqlreq.input('vNikudValue',SQL.NVarChar,Bdy.NikudValue);
-        sqlreq.input('vMachpil',SQL.NVarChar,Bdy.Machpil);
-        sqlreq.input('vMathAction',SQL.Int,Bdy.MathAction);
+        sqlreq.input('vStageYaadDateAuto',SQL.NVarChar,OtherFunctions.FixDate(Bdy.StageYaadDateAuto));
+        sqlreq.input('vStageYaadDateManual',SQL.NVarChar,OtherFunctions.FixDate(Bdy.StageYaadDateManual));
+        sqlreq.input('vStageUpdateDate',SQL.NVarChar,OtherFunctions.FixDate(Bdy.StageUpdateDate));
+        sqlreq.input('vDateOfPaperWork',SQL.NVarChar,OtherFunctions.FixDate(Bdy.DateOfPaperWork));
+        sqlreq.input('vDateOfHfakatDoch',SQL.NVarChar,OtherFunctions.FixDate(Bdy.DateOfHfakatDoch));
+        sqlreq.input('vDateYaadSpecial',SQL.NVarChar,OtherFunctions.FixDate(Bdy.DateYaadSpecial));			
         
         sqlreq.output('Success', SQL.Int)
 
-         var data=await DB.ExecuteSP(sqlreq,"ECSM_NikudTableUpdate");
+         var data=await DB.ExecuteSP(sqlreq,"ECSM_ReportStagesTableForDatesUpdate");
 
          if (data.output.Success=1 && data.rowsAffected0>0){
              res.send(JSON.stringify(Bdy));
@@ -66,66 +59,5 @@ router.post('/UpdateNikud',async function(req,res){
     }   
 });
 
-router.post('/InsertNikud',async function(req,res){
-    try{
-        var sqlreq= new SQL.Request();
-        var Bdy=await req.body.value;
-        
-        sqlreq.input('vObjectTypeDis',SQL.NVarChar,Bdy.ObjectType);
-        sqlreq.input('vObjectCodeDis',SQL.NVarChar,Bdy.ObjCodeDis);
-        sqlreq.input('vDateStart',SQL.NVarChar,OtherFunctions.FixDate(Bdy.DateStart));
-        if (Bdy.DateEnd){
-            sqlreq.input('vDateEnd',SQL.NVarChar,OtherFunctions.FixDate(Bdy.DateEnd));            
-        }
-        else{
-            sqlreq.input('vDateEnd',SQL.NVarChar,Bdy.DateEnd);
-        }
-        sqlreq.input('vNikudType',SQL.Int,Bdy.NikudType);
-        sqlreq.input('vNikudValue',SQL.NVarChar,Bdy.NikudValue);
-        sqlreq.input('vMachpil',SQL.NVarChar,Bdy.Machpil);
-        sqlreq.input('vMathAction',SQL.Int,Bdy.MathAction);
-
-        sqlreq.output('Success', SQL.Int)
-
-        var data=await DB.ExecuteSP(sqlreq,"ECSM_NikudTableInsert");
-        if (data.output.Success=1 && data.rowsAffected0>0){
-            Bdy.ID=data.returnValue;
-            res.send(JSON.stringify(Bdy));
-        }
-        else
-        {
-            res.status(204).send('err');
-        }
-       
-    }catch(err){
-        console.log(err);
-        res.send(err);
-    }   
-});
-
-router.post('/DeleteNikud',async function(req,res){
-    try{
-        var sqlreq= new SQL.Request();
-        var Bdy=await req.body;
-        
-        sqlreq.input('IDper',SQL.Int,Bdy.key);
-       
-        sqlreq.output('Success', SQL.Int)
-
-        var data=await DB.ExecuteSP(sqlreq,"ECSM_NikudTableDelete");
-        if (data.output.Success=1 && data.rowsAffected0>0){
-            
-            res.send(JSON.stringify(Bdy));
-        }
-        else
-        {
-            res.status(204).send('err');
-        }
-       
-    }catch(err){
-        console.log(err);
-        res.send(err);
-    }   
-});
 
 module.exports=router;
