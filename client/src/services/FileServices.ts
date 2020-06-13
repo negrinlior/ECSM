@@ -27,7 +27,29 @@ class FileServices {
       return 1;
     }
 
-  
+  //UploadTarichiHariga
+  static async UploadTarichiHariga(Fil){
+
+    var x=await Fil;
+    let formData = new FormData();
+    formData.append('file1', x);
+
+    await axios.post( ServerConfig.FileUploadAPI  + 'UploadTarichiHariga/',
+              formData
+              ).then(response=>{
+                if (response.data.Success==1){
+                    alert('נטען בהצלחה');
+                }else{
+                    alert('ERROR : ' + response.data.Reason);
+                }
+                
+              })
+              .catch(e => {
+                alert('F' + e);
+              });
+    return 1;
+  }
+
 
   }
 

@@ -69,5 +69,35 @@ router.post('/UploadBdikot',Upload.single('file1'),async function(req,res){
     }   
 });
 
+router.post('/UploadTarichiHariga',Upload.single('file1'),async function(req,res){
+    try{
+        var fs = require('fs');
+        // SRc,DST,ERROR   -   destination.txt will be created or overwritten by default.
+        await fs.copyFile(req.file.path, config.TarichHarigaFilePTH, (err) => {
+            if (err) throw err;
+        });
+        
+        //Delete SRC file
+        fs.unlinkSync(req.file.path);
+
+        //RUN SP
+        var sqlreq= new SQL.Request();
+        sqlreq.input('FilePTH',SQL.NVarChar,'C'); //אין משמעות לנתיב
+        sqlreq.output('SuccessOutput', SQL.Int)
+        
+        var data=await DB.ExecuteSP(sqlreq,"DateHarigaLoad");
+        if (data.output.SuccessOutput=1){
+            res.send({Success:1,Reason:'Execute Success'});
+        }
+        else
+        {
+            res.send(JSON.stringify({Success:-1,Reason:'Execute Fail'}));
+        }
+
+    }catch(err){
+        console.log(err);
+        res.send(JSON.stringify({Success:-1,Reason:'Connection Fail'}));
+    }   
+});
 
 module.exports=router;

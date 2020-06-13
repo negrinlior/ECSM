@@ -101,8 +101,7 @@ export default Vue.extend({
        GetDataServices.GetDataForGrid(gridOj,'TarichiCharigaAPI');
       },
       async UploadTarichFileFile() { 
-                // var x=await FileUploadServices.UploadBdikot(this.$refs.BdikotFileUploadPTH.files[0]);
-        alert("Hi");
+        var x=await FileUploadServices.UploadTarichiHariga(this.$refs.BdikotFileUploadPTH.files[0]);
         this.GridCreated();
       },
    },

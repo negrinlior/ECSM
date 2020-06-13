@@ -14,5 +14,6 @@ module.exports = {
 
     // ============    File CONFIGURATION    ============
     'BdikotFilePTH':'C:\\Lior\\BdikotLoad.csv',
+    'TarichHarigaFilePTH':'C:\\Lior\\DatesHariga.xlsx',
 
 };
