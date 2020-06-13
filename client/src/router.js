@@ -76,6 +76,14 @@ const RTR= new Router({
         requiresAuth: false
       }
     },
+    {
+      path: '/TarichiChariga',
+      name: 'TarichiChariga',
+      component: () => import('./views/ECSM/TarichiChariga.vue'),
+      meta: { 
+        requiresAuth: false
+      }
+    },
   ]
 })
 

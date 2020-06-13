@@ -22,6 +22,7 @@ app.use(cors());
     const NikudAPI=require('./routs/api/Nikud');
     const TarichiBdikaAPI=require('./routs/api/TarichiBdika');
     const NihulShlavimToClientAPI=require('./routs/api/NihulShlavimToClient');
+    const TarichiCharigaAPI=require('./routs/api/TarichiChariga');
 
     //Routh routing
     app.use('/',GetsVersion);
@@ -34,6 +35,7 @@ app.use(cors());
     app.use('/api/NikudAPI',NikudAPI);
     app.use('/api/TarichiBdikaAPI',TarichiBdikaAPI);
     app.use('/api/NihulShlavimToClientAPI',NihulShlavimToClientAPI);
+    app.use('/api/TarichiCharigaAPI',TarichiCharigaAPI);
     
 
 
