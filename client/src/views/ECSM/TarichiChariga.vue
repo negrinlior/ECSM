@@ -28,7 +28,7 @@
     </e-columns>
    </ejs-grid>
 
-      <input type="file" ref="TarichiHarigaFileUploadPTH" style="display: none" v-on:change="UploadTarichFileFile()">
+   <input type="file" ref="TarichiHarigaFileUploadPTH" style="display: none" v-on:change="UploadTarichFile()">
 
   </div>
 </template>
@@ -100,8 +100,8 @@ export default Vue.extend({
        var gridOj =this.$refs.MainGrid; 
        GetDataServices.GetDataForGrid(gridOj,'TarichiCharigaAPI');
       },
-      async UploadTarichFileFile() { 
-        var x=await FileUploadServices.UploadTarichiHariga(this.$refs.BdikotFileUploadPTH.files[0]);
+      async UploadTarichFile() { 
+        var x=await FileUploadServices.UploadTarichiHariga(this.$refs.TarichiHarigaFileUploadPTH.files[0]);
         this.GridCreated();
       },
    },
