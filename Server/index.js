@@ -19,11 +19,12 @@ app.use(cors());
     const UsersAPI=require('./routs/api/UserList');
     const HaktzaatBdikotAPI=require('./routs/api/HaktzaatBdikot');
     const BdikotAPI=require('./routs/api/Bdikot');
+    const NetuniEzerAPI=require('./routs/api/NetuniEzer');
     const NikudAPI=require('./routs/api/Nikud');
     const TarichiBdikaAPI=require('./routs/api/TarichiBdika');
     const NihulShlavimToClientAPI=require('./routs/api/NihulShlavimToClient');
     const TarichiCharigaAPI=require('./routs/api/TarichiChariga');
-
+    
     //Routh routing
     app.use('/',GetsVersion);
     app.use('/api/FKeysLists',FKeysListsAPI);
@@ -32,6 +33,7 @@ app.use(cors());
     app.use('/api/UsersAPI',UsersAPI);
     app.use('/api/HaktzaatBdikotAPI',HaktzaatBdikotAPI);
     app.use('/api/BdikotAPI',BdikotAPI);
+    app.use('/api/NetuniEzerAPI',NetuniEzerAPI);
     app.use('/api/NikudAPI',NikudAPI);
     app.use('/api/TarichiBdikaAPI',TarichiBdikaAPI);
     app.use('/api/NihulShlavimToClientAPI',NihulShlavimToClientAPI);

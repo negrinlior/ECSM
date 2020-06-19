@@ -12,7 +12,8 @@ const RTR= new Router({
       name: 'home',
       component: Home,
       meta: { 
-        guest: true
+        guest: true,
+        nm:'בית'
       }
     },
     {
@@ -20,20 +21,25 @@ const RTR= new Router({
       name: 'About',
       component: () => import('./views/About.vue'),
       meta: { 
-        requiresAuth: true
+        requiresAuth: true,
+        nm:'אודות'
       }
     },
     {
       path: '/login',
       name: 'Login',
-      component: () => import( './views/Login.vue')
+      component: () => import( './views/Login.vue'),
+      meta: { 
+        nm:'התחברות'
+      }
     },
     {
       path: '/UsersGrid',
       name: 'UsersGrid',
       component: () => import('./views/ECSM/UsersGrid.vue'),
       meta: { 
-        requiresAuth: false
+        requiresAuth: false,
+        nm:'משתמשים'
       }
     },
     {
@@ -41,7 +47,16 @@ const RTR= new Router({
       name: 'HaktzaatBdikot',
       component: () => import('./views/ECSM/HaktzaatBdikot.vue'),
       meta: { 
-        requiresAuth: false
+        requiresAuth: false,
+        nm:'הקצאת בדיקות'
+      }
+    },{
+      path: '/NetuniEzer',
+      name: 'NetuniEzer',
+      component: () => import('./views/ECSM/NetuniEzer.vue'),
+      meta: { 
+        requiresAuth: false,
+        nm:'נתוני עזר'
       }
     },
     {
@@ -49,7 +64,8 @@ const RTR= new Router({
       name: 'Bdikot',
       component: () => import('./views/ECSM/Bdikot.vue'),
       meta: { 
-        requiresAuth: false
+        requiresAuth: false,
+        nm:'ניהול בדיקות'
       }
     },
     {
@@ -57,7 +73,8 @@ const RTR= new Router({
       name: 'Nikud',
       component: () => import('./views/ECSM/Nikud.vue'),
       meta: { 
-        requiresAuth: false
+        requiresAuth: false,
+        nm:'ניקוד'
       }
     },
     {
@@ -65,7 +82,8 @@ const RTR= new Router({
       name: 'TarichiBdika',
       component: () => import('./views/ECSM/TarichiBdika.vue'),
       meta: { 
-        requiresAuth: false
+        requiresAuth: false,
+        nm:'ניהול תאריכי בדיקות'
       }
     },
     {
@@ -73,7 +91,8 @@ const RTR= new Router({
       name: 'NihulShlavimToClient',
       component: () => import('./views/ECSM/NihulShlavimToClient.vue'),
       meta: { 
-        requiresAuth: false
+        requiresAuth: false,
+        nm:'ניהול שלבי בדיקה ללקוח'
       }
     },
     {
@@ -81,7 +100,8 @@ const RTR= new Router({
       name: 'TarichiChariga',
       component: () => import('./views/ECSM/TarichiChariga.vue'),
       meta: { 
-        requiresAuth: false
+        requiresAuth: false,
+        nm:'ניהול תאריכי חריגה'
       }
     },
   ]
@@ -101,6 +121,9 @@ RTR.beforeEach((to, from, next) => {
   else{
     next();
   }
+
+  store.commit('SetCurrPage', to.meta.nm); //שינוי שם העמוד הנוכחי
+
 })
 
 export default RTR

@@ -19,8 +19,7 @@ class GetDataServices {
     }
     */
 
-
-    
+      
     //Get Data for grid
     static GetDataForGrid(grid: any,typ: string){
       var gridObj = grid 
@@ -39,6 +38,34 @@ class GetDataServices {
     static GetFkeyList(typ: string){
 
       return axios.get(ServerConfig.FKeysListsAPI + typ + '/')
+                    .then(response => {
+                      return response.data; 
+                    })
+                    .catch(e => {
+                      alert('F' + e);
+                    })
+    }
+
+    //repopulate grid
+    static RegenrateDataForGrid(grid: any,typ: string){
+      var gridObj = grid
+      return axios.get(ServerConfig.ServerAPI + typ + '/')
+                  .then(response => {
+                        gridObj.dataSource.dataSource.json  =[];
+                        gridObj.columns=[];
+                        gridObj.dataSource.dataSource.json  = response.data;
+                        gridObj.refreshColumns();
+                        return 1;
+                  })
+      .catch(e => {
+                  alert('F' + e);
+      })
+    }
+
+     //Run Stored Procedure by Get API usually success=1, fail=-1
+     static RunSPByGetAPI(APIName: string){
+
+      return axios.get(ServerConfig.ServerAPI + APIName + '/')
                     .then(response => {
                       return response.data; 
                     })

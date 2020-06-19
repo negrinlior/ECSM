@@ -10,10 +10,14 @@
         <v-icon>list</v-icon>
         </v-btn>
         
-        <H1 class="ECSHEADER">ECS Managment</H1>
+        
+        <H1 class="ECSHEADER">{{GetCurrPage}}</H1>
         <!-- <H1 class="ECSHEADER">בית - </H1> -->
+        
 
         <v-spacer/>
+        <H1 class="ECSHEADER">ECS Managment</H1> 
+
         <v-btn
             color="#33DDDD"
             dark
@@ -88,6 +92,7 @@ export default {
         //   { title: 'התחברות', icon: 'dashboard', adrs: '/login' },
             { title: 'משתמשים', icon: 'face', adrs: '/UsersGrid' },
             { title: 'הקצאת בדיקות', icon: 'how_to_reg', adrs: '/HaktzaatBdikot' },
+            { title: 'נתוני עזר', icon: 'how_to_reg', adrs: '/NetuniEzer' },
             { title: 'ניהול בדיקות', icon: 'book', adrs: '/Bdikot' },
             { title: 'ניקוד', icon: 'pending_actions', adrs: '/Nikud' },
             { title: 'ניהול תאריכי בדיקות', icon: 'date_range', adrs: '/TarichiBdika' },
@@ -97,7 +102,7 @@ export default {
         ]
       }
     },
-    computed: mapGetters(['GetUserFirstChar','GetUser']),
+    computed: mapGetters(['GetUserFirstChar','GetUser','GetCurrPage']),
     components:{
         LI
     }
