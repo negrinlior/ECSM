@@ -11,4 +11,5 @@ module.exports = {
     'NihulShlavimToClientAPI': 'http://localhost:5000/api/NihulShlavimToClientAPI/',
     'FKeysListsAPI': 'http://localhost:5000/api/FKeysLists/',
     'FileUploadAPI': 'http://localhost:5000/api/FileUpload/',
+    'HomeBIAPI': 'http://localhost:5000/api/HomeBIAPI/',
 };

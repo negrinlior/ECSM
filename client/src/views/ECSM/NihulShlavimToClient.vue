@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoades" class="NihulShlavimToClient">
-      <ejs-grid id='mainGrid' ref='MainGrid' height=480  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' :allowPaging="true" :pageSettings='pageSettings'> 
+      <ejs-grid id='mainGrid' ref='MainGrid' height=380  locale='he-IL' :allowFiltering='true' :allowSorting='true' :filterSettings='filterOptions'  :created='GridCreated' :dataSource="dataSource" :toolbar='toolbar'  :editSettings='editSettings' :toolbarClick='toolbarClick'  :allowExcelExport='true' :allowResizing='true' :allowPaging="true" :pageSettings='pageSettings'> 
         <e-columns>
           <e-column field='ID'  headerText='ID' textAlign='Right' width=1 :allowEditing ='false' :isPrimaryKey='true' :isIdentity='true'></e-column>
           <e-column field='IDClient' headerText='לקוח' textAlign='Right' width=200 foreignKeyField='ID' foreignKeyValue='CustomerName' :dataSource='Customers' :allowEditing ='false'></e-column>
