@@ -92,7 +92,7 @@ export default {
         //   { title: 'התחברות', icon: 'dashboard', adrs: '/login' },
             { title: 'משתמשים', icon: 'face', adrs: '/UsersGrid' },
             { title: 'הקצאת בדיקות', icon: 'how_to_reg', adrs: '/HaktzaatBdikot' },
-            { title: 'נתוני עזר', icon: 'how_to_reg', adrs: '/NetuniEzer' },
+            { title: 'נתוני עזר', icon: 'dvr', adrs: '/NetuniEzer' },
             { title: 'ניהול בדיקות', icon: 'book', adrs: '/Bdikot' },
             { title: 'ניקוד', icon: 'pending_actions', adrs: '/Nikud' },
             { title: 'ניהול תאריכי בדיקות', icon: 'date_range', adrs: '/TarichiBdika' },
