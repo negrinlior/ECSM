@@ -18,7 +18,7 @@
         <v-spacer/>
         <H1 class="ECSHEADER">ECS Managment</H1> 
 
-        <v-btn
+        <!-- <v-btn
             color="#33DDDD"
             dark
             icon
@@ -27,7 +27,7 @@
         >
             <div v-if="GetUser==''"><v-icon>vpn_key</v-icon></div>
             <div v-else>{{GetUserFirstChar}}</div>
-        </v-btn>
+        </v-btn> -->
 
         <v-navigation-drawer
             v-model="drawer"
@@ -37,7 +37,8 @@
         <v-list class="pa-1">
             <v-list-tile avatar>
             <v-list-tile-avatar>
-                <img src="https://randomuser.me/api/portraits/men/85.jpg">
+                <!-- <img src="https://randomuser.me/api/portraits/men/85.jpg"> -->
+                <img src="../../assets/UserIcon.jpg">
             </v-list-tile-avatar>
 
             <v-list-tile-content>

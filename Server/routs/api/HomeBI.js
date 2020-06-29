@@ -4,12 +4,9 @@ const config = require('../../config');
 const SQL=require("mssql");
 
 const router=express.Router();
-const SelectQryLakochot=`SELECT * FROM CustomersView`;
-const SelectQryAnafim=`SELECT * FROM AvafimView`;
-const SelectQryRashuiot=`SELECT * FROM RashuiotView`;
-const SelectQryKablanim=`SELECT * FROM KablanimView`;
-const SelectQryMechrazim=`SELECT * FROM MechreazimView`;
-
+const SelectQryClientDisterbution =`select * from ECSM_ClientDisterbution ORDER BY CustomerID`;
+const SelectQryBdikotByClientAndYear =`select * from ECSM_BdikotByClientAndYear`;
+//const SelectQryBdikotByClientAndYear =`select שנה, sum([מספר בדיקות]) as "מספר בדיקות" from ECSM_BdikotByClientAndYear group by שנה`;
 
 router.get('/',async function(req,res){  
     try{
@@ -26,24 +23,44 @@ router.get('/',async function(req,res){
 
 });
 
-// router.get('/Anafim/',async function(req,res){  
-//     try{
-//         var data=await DB.CommitSelectAndReturnRecordset(SelectQryAnafim);
-//         if (data.rowsAffected>0){
-//             res.send(JSON.stringify(data.recordsets[0]));
-//         }
-//         else
-//         {
-//             res.status(204).end();
-//         }
+router.get('/ClientDisterbution',async function(req,res){  
+     try{
+           
+         var data=await DB.CommitSelectAndReturnRecordset(SelectQryClientDisterbution);
+         if (data.rowsAffected>0){
+            res.send(JSON.stringify(data.recordsets[0]));
+         }
+         else
+         {
+             res.status(204).end();
+         }
        
         
-//     }catch(err){
-//         res.send(err);
-//     }   
+     }catch(err){
+         res.send(err);
+     }   
 
-// });
+ });
 
+ 
+router.get('/BdikotByClientAndYear',async function(req,res){  
+    try{
+          
+        var data=await DB.CommitSelectAndReturnRecordset(SelectQryBdikotByClientAndYear);
+        if (data.rowsAffected>0){
+           res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+      
+       
+    }catch(err){
+        res.send(err);
+    }   
+
+});
 
 
 module.exports=router;

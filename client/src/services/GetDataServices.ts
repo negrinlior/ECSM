@@ -73,6 +73,18 @@ class GetDataServices {
                       alert('F' + e);
                     })
     }
+
+    //Get Data for grid
+    static GetDataFromAPIReturnJson(APILinkWithoutServer: string){
+      return axios.get(ServerConfig.ServerAPI + APILinkWithoutServer + '/')
+                    .then(response => {
+                      return response.data; 
+                    })
+                    .catch(e => {
+                      alert('F' + e);
+                    })
+    }
+    
 }
 
 export default GetDataServices;
