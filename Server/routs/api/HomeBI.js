@@ -5,8 +5,7 @@ const SQL=require("mssql");
 
 const router=express.Router();
 const SelectQryClientDisterbution =`select * from ECSM_ClientDisterbution ORDER BY CustomerID`;
-const SelectQryBdikotByClientAndYear =`select * from ECSM_BdikotByClientAndYear`;
-//const SelectQryBdikotByClientAndYear =`select שנה, sum([מספר בדיקות]) as "מספר בדיקות" from ECSM_BdikotByClientAndYear group by שנה`;
+const SelectQryBdikotByClientAndYear =`select * from ECSM_BdikotByClientAndYear  where [שנה]>2010 order by [שנה]`;
 
 router.get('/',async function(req,res){  
     try{
