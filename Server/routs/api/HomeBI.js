@@ -4,8 +4,9 @@ const config = require('../../config');
 const SQL=require("mssql");
 
 const router=express.Router();
-const SelectQryClientDisterbution =`select * from ECSM_ClientDisterbution ORDER BY CustomerID`;
-const SelectQryBdikotByClientAndYear =`select * from ECSM_BdikotByClientAndYear  where [שנה]>2010 order by [שנה]`;
+const SelectQryClientDisterbution =`select * from ECSM_BI_ClientDisterbution ORDER BY CustomerID`;
+const SelectQryBdikotByClientAndYear =`select * from ECSM_BI_BdikotByClientAndYear  where [שנה]>2010 order by [שנה]`;
+const SelectQryStats =`select * from ECSM_BI_Stats`;
 
 router.get('/',async function(req,res){  
     try{
@@ -61,5 +62,24 @@ router.get('/BdikotByClientAndYear',async function(req,res){
 
 });
 
+
+router.get('/Stats',async function(req,res){  
+    try{
+          
+        var data=await DB.CommitSelectAndReturnRecordset(SelectQryStats);
+        if (data.rowsAffected>0){
+           res.send(JSON.stringify(data.recordsets[0]));
+        }
+        else
+        {
+            res.status(204).end();
+        }
+      
+       
+    }catch(err){
+        res.send(err);
+    }   
+
+});
 
 module.exports=router;
