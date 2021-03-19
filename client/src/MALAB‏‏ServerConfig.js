@@ -1,0 +1,15 @@
+module.exports = {
+    'ServerURL':'http://srv19:5000/',
+    'ServerAPI': 'http://srv19:5000/api/',
+    'UsersAPI': 'http://srv19:5000/api/UsersAPI/',
+    'HaktzaatBdikotAPI': 'http://srv19:5000/api/HaktzaatBdikotAPI/',
+    'BdikotAPI': 'http://srv19:5000/api/BdikotAPI/',
+    'NetuniEzerAPI': 'http://srv19:5000/api/NetuniEzerAPI/',
+    'NikudAPI': 'http://srv19:5000/api/NikudAPI/',
+    'TarichiBdikaAPI': 'http://srv19:5000/api/TarichiBdikaAPI/',
+    'TarichiCharigaAPI': 'http://srv19:5000/api/TarichiCharigaAPI/',
+    'NihulShlavimToClientAPI': 'http://srv19:5000/api/NihulShlavimToClientAPI/',
+    'FKeysListsAPI': 'http://srv19:5000/api/FKeysLists/',
+    'FileUploadAPI': 'http://srv19:5000/api/FileUpload/',
+    'HomeBIAPI': 'http://srv19:5000/api/HomeBIAPI/',
+};

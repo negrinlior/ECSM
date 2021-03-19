@@ -45,7 +45,8 @@ router.get('/ClientDisterbution',async function(req,res){
  
 router.get('/BdikotByClientAndYear',async function(req,res){  
     try{
-          
+        //const { spawn } = require('child_process');
+        //const child = spawn('cmd.exe excel');  
         var data=await DB.CommitSelectAndReturnRecordset(SelectQryBdikotByClientAndYear);
         if (data.rowsAffected>0){
            res.send(JSON.stringify(data.recordsets[0]));
