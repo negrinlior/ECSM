@@ -24,7 +24,9 @@ app.use(cors());
     const TarichiBdikaAPI=require('./routs/api/TarichiBdika');
     const NihulShlavimToClientAPI=require('./routs/api/NihulShlavimToClient');
     const TarichiCharigaAPI=require('./routs/api/TarichiChariga');
+    const HolidaysAPI=require('./routs/api/Holidays');
     const HomeBIAPI=require('./routs/api/HomeBI');
+    
     
     //Routh routing
     app.use('/',GetsVersion);
@@ -39,6 +41,7 @@ app.use(cors());
     app.use('/api/TarichiBdikaAPI',TarichiBdikaAPI);
     app.use('/api/NihulShlavimToClientAPI',NihulShlavimToClientAPI);
     app.use('/api/TarichiCharigaAPI',TarichiCharigaAPI);
+    app.use('/api/HolidaysAPI',HolidaysAPI);
     app.use('/api/HomeBIAPI',HomeBIAPI);
     
 
