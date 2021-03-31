@@ -28,7 +28,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created,Page } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created,Page, GridComponent } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import GetDataServices from '../../services/GetDataServices';
     import FileUploadServices from '../../services/FileServices';
@@ -76,24 +76,25 @@ export default Vue.extend({
         grid: [Sort,Filter,Edit, Toolbar,ExcelExport,Resize,ForeignKey,Page]       
       },
       methods:{
-            toolbarClick: async function(args) {
+            toolbarClick: async function(args): Promise<void> {
               if (args.item.id === 'mainGrid_excelexport') {
-                  this.$refs.MainGrid.excelExport();
+                (this.$refs.MainGrid as GridComponent).excelExport();
                   var x=this.$refs.MainGrid; //Usless, but somehow mak it work 
               }
               if (args.item.id === "ClearAllFilters"){
-                  this.$refs.MainGrid.clearFiltering();
+                  (this.$refs.MainGrid as GridComponent).clearFiltering();
               }
               if (args.item.id === "UpldFile"){
-                  this.$refs.BdikotFileUploadPTH.click(); //Open file dialog
+                  (this.$refs.BdikotFileUploadPTH as any).click(); //Open file dialog
               }
             },
             async GridCreated() { 
+              debugger;
               var gridOj =this.$refs.MainGrid;  
               GetDataServices.GetDataForGrid(gridOj,'BdikotAPI');
             },
             async UploadBdikotFile() { 
-                var x=await FileUploadServices.UploadBdikot(this.$refs.BdikotFileUploadPTH.files[0]);
+                var x=await FileUploadServices.UploadBdikot((<any>this.$refs.BdikotFileUploadPTH).files[0]);
                 this.GridCreated();
             },
       },
@@ -105,7 +106,7 @@ export default Vue.extend({
           this.Anafim=await GetDataServices.GetFkeyList('Anafim');  
           this.Customers=await GetDataServices.GetFkeyList('Customers');  
           this.StagesList=await GetDataServices.GetFkeyList('StageList');  
-          
+
           this.isLoades=true;  //ok can render coponent
       },
       

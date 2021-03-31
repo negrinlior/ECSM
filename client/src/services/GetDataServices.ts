@@ -25,8 +25,9 @@ class GetDataServices {
       var gridObj = grid 
       return axios.get(ServerConfig.ServerAPI + typ + '/')
                     .then(response => {
+                     
                       gridObj.dataSource.dataSource.json = response.data; 
-                      gridObj.refreshColumns();   
+                      gridObj.refreshColumns();    
                       return 1; 
                     })
                     .catch(e => {

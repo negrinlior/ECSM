@@ -21,7 +21,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin,Page, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin,Page, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created, GridComponent } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import { DropDownList } from "@syncfusion/ej2-dropdowns";
     import { Query } from '@syncfusion/ej2-data';
@@ -125,15 +125,15 @@ export default Vue.extend({
       methods:{
             toolbarClick: async function(args) {
               if (args.item.id === 'mainGrid_excelexport') {
-                  this.$refs.MainGrid.excelExport();
+                  (this.$refs.MainGrid as GridComponent).excelExport();
                   var x=this.$refs.MainGrid; //Usless, but somehow mak it work 
               }
               if (args.item.id === "ClearAllFilters"){
-                  this.$refs.MainGrid.clearFiltering();
+                  (this.$refs.MainGrid as GridComponent).clearFiltering();
               }
             },
             async GridCreated() { 
-              var gridOj =this.$refs.MainGrid;  
+              var gridOj =(this.$refs.MainGrid as GridComponent);  
               GetDataServices.GetDataForGrid(gridOj,'NikudAPI');
             },
       },

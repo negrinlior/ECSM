@@ -7,7 +7,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created,Page } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, ForeignKey, created,Page, GridComponent } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import GetDataServices from '../../services/GetDataServices';
     import FileUploadServices from '../../services/FileServices';
@@ -53,12 +53,12 @@ export default Vue.extend({
       methods:{
             dataBound: function() {
               //Set auto width to columns
-              this.$refs.MainGrid.autoFitColumns();
+              (this.$refs.MainGrid as GridComponent).autoFitColumns();
             },
             toolbarClick: async function(args) {
-              var gridOj =this.$refs.MainGrid;
+              var gridOj = (this.$refs.MainGrid as GridComponent);
               if (args.item.id === "ClearAllFilters"){
-                this.$refs.MainGrid.clearFiltering();
+                (this.$refs.MainGrid as GridComponent).clearFiltering();
               }
               if (args.item.id === "Anafim"){
                 GetDataServices.RegenrateDataForGrid(gridOj,'NetuniEzerAPI/Anafim');

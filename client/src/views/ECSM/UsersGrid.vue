@@ -19,7 +19,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import { L10n, setCulture } from '@syncfusion/ej2-base';
-    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize } from '@syncfusion/ej2-vue-grids';
+    import { GridPlugin, Filter, Sort, Edit, Toolbar, ExcelExport, Resize, GridComponent } from '@syncfusion/ej2-vue-grids';
     import { DataManager, WebApiAdaptor,RemoteSaveAdaptor } from "@syncfusion/ej2-data";
     import GetDataServices from '../../services/GetDataServices';
     import HebConf from './GridHebConfig.js';
@@ -54,7 +54,7 @@ export default Vue.extend({
       methods:{
             toolbarClick: function(args) {
               if (args.item.id === 'mainGrid_excelexport') {
-                  this.$refs.MainGrid.excelExport();
+                  (this.$refs.MainGrid as GridComponent).excelExport();
                   var x=this.$refs.MainGrid; //Usless, but somehow mak it work 
               }
             },
